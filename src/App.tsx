@@ -5,7 +5,6 @@ import Home from "./components/home/home";
 import Reservation from "./components/reservation/reservation";
 import Contact from "./components/contact/contact";
 import Admin from "./components/admin/admin";
-import Create from "./components/create/create";
 
 function App() {
   return (
@@ -27,16 +26,10 @@ function App() {
             <li>
               <NavLink to="/admin">Admin</NavLink>
             </li>
-            <li>
-              <NavLink to="/create">Create</NavLink>
-            </li>
           </ul>
         </nav>
       </header>
       <Switch>
-        <Route path="/create">
-          <Create />
-        </Route>
         <Route path="/reservation">
           <Reservation />
         </Route>
