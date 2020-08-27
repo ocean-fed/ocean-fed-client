@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import "./App.scss";
-import Home from "./components/home/home";
-import Reservation from "./components/reservation/reservation";
-import Contact from "./components/contact/contact";
-import Admin from "./components/admin/admin";
+import Home from "./components/home/Home";
+import Reservation from "./components/reservation/Reservation";
+import Contact from "./components/contact/Contact";
+import Admin from "./components/admin/Admin";
 
 function App() {
   return (
