@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReservationInputs from "./reservation-inputs/ReservationInputs";
 
 export default function Reservation() {
 
@@ -11,6 +12,7 @@ export default function Reservation() {
   return (
     <main>
       <p>Reservation works.</p>
+      <ReservationInputs></ReservationInputs>
     </main>
   )
 }
