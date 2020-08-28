@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import PostGuestAndReservationData from "./post-guest-and-reservation-data/PostGuestAndReservationData";
 import Guest from "../../models/Guest";
+=======
+import ReservationInputs from "./reservation-inputs/ReservationInputs";
+>>>>>>> 14d3e96f28b8c0ec2c0293592620bb0f92da71f0
 
 export default function Reservation() {
 
@@ -34,6 +38,7 @@ export default function Reservation() {
     <>
     <main>
       <p>Reservation works.</p>
+      <ReservationInputs></ReservationInputs>
     </main>
     <button type="button" onClick={() => { whenReservingFromMockButton() }}>Reserve</button>
     <PostGuestAndReservationData reserve={reserve} setReserveTo={() => setReserve(!reserve)} guestData={guestData} chosenTime={chosenTime} date={date} numOfSeats={numOfSeats}></PostGuestAndReservationData>
