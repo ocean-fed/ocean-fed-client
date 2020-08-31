@@ -11,7 +11,7 @@ export default function Create() {
   newGuest.phone = "0765987458";
 
   function createAGuest() {
-    const createUrl = "http://localhost:4000/create";
+    const createUrl = "http://localhost:4000/createguest";
     axios({
       method: "post",
       url: createUrl,
