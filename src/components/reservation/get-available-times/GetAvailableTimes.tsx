@@ -3,7 +3,7 @@ import axios from "axios";
 import Reservation from "../../../models/Reservation";
 import Seating from "../../../models/Seating";
 
-interface IGetAvailableTimes {
+export interface IGetAvailableTimes {
   getAvailableTimesByDate: boolean;
   setGetAvailableTimesByDate(): void;
   date: string;

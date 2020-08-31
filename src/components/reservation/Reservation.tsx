@@ -3,7 +3,7 @@ import PostGuestAndReservationData from "./post-guest-and-reservation-data/PostG
 import Guest from "../../models/Guest";
 import ReservationInputs from "./reservation-inputs/ReservationInputs";
 import GetAvailableTimes from "./get-available-times/GetAvailableTimes";
-import Seating from "../../models/Seating";
+import Search from "./search/Search";
 
 export default function Reservation() {
 
@@ -36,30 +36,45 @@ export default function Reservation() {
     setReserve(true);
   }
 
-  function whenClickingOnMockGetAvailableTimesByDateButton() {
+  /* function whenClickingOnMockGetAvailableTimesByDateButton() {
     setDate(mockDate);
     setNumOfSeats(mockNumOfSeats);
 
     setGetAvailableTimesByDate(true);
-  }
+  } */
   
   function updateAvailableTimes(times: String[]) {
     setAvailableTimes(times);
     console.log("availableTimes:", availableTimes);
   }
 
+  function updateNumOfSeatsAndDate(numOfSeatsFromSearch: number, dateFromSearch: string) {
+    setNumOfSeats(numOfSeatsFromSearch);
+    setDate(dateFromSearch);
+    setGetAvailableTimesByDate(true);
+  }
+
   return (
     <>
     <main>
       <p>Reservation works.</p>
+      <Search updateNumOfSeatsAndDate={updateNumOfSeatsAndDate}></Search>
+      <p>{numOfSeats}, {date}, {JSON.stringify(getAvailableTimesByDate)}</p>
+      <br />
+      <br />
+      <hr/>
+
+
+
       <ReservationInputs></ReservationInputs>
     </main>
     <br/>
     <br/>
-    <button type="button" onClick={() => { whenClickingOnMockGetAvailableTimesByDateButton() }}>MockGetAvailableTimesByDate</button><br/>
+    {/* <button type="button" onClick={() => { whenClickingOnMockGetAvailableTimesByDateButton() }}>MockGetAvailableTimesByDate</button><br/> */}
+    <hr/>
     <GetAvailableTimes numOfSeats={numOfSeats} date={date} setGetAvailableTimesByDate={() => setGetAvailableTimesByDate(!getAvailableTimesByDate)} getAvailableTimesByDate={getAvailableTimesByDate} updateAvailableTimes={updateAvailableTimes}></GetAvailableTimes>
     <p>{JSON.stringify(availableTimes)}</p>
-
+    <hr/>
 
     <button type="button" onClick={() => { whenReservingFromMockReserveButton() }}>MockReserve</button>
 

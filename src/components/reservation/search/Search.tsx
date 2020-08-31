@@ -1,6 +1,11 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 
-export default function Search() {
+export interface ISearchProps {
+  updateNumOfSeatsAndDate(numOfSeats: number, date: string): void;
+}
+
+export default function Search(props: ISearchProps) {
+
   const [numOfSeats, setNumOfSeats] = useState("");
   const [date, setDate] = useState("");
 
@@ -14,7 +19,10 @@ export default function Search() {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
+    let numOfSeatsAsANumber = Number(numOfSeats);
+    props.updateNumOfSeatsAndDate(numOfSeatsAsANumber, date);
     console.log(`
+      Sent from Search the following:
       numOfSeats: ${numOfSeats}
       Date: ${date}
     `);
@@ -33,6 +41,7 @@ export default function Search() {
           required
         />
       </label>
+      <br/>
       <label>
         Datum:
         <input
@@ -43,6 +52,7 @@ export default function Search() {
           required
         />
       </label>
+      <br/>
       <button type="submit">Submit</button>
     </form>
   );
