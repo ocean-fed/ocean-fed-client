@@ -13,7 +13,7 @@ interface IPostGuestAndReservationData {
 
 export default function PostGuestAndReservationData(props: IPostGuestAndReservationData) {
   function sendGuestAndReservationData() {
-    const createUrl = "http://localhost:4000/createguest";
+    const createUrl = "http://localhost:4000/create-guest-and-reservation";
 
     axios({
       method: "post",
@@ -24,8 +24,10 @@ export default function PostGuestAndReservationData(props: IPostGuestAndReservat
       },
     })
       .then((response) => {
-        console.log("it created a guest.");
+        console.log("guestData and reservationData sent.");
         console.log(response.data);
+        const refIdOfLastReservation = response.data.reservationsDB[response.data.reservationsDB.length-1].refId;
+        console.log("refId of the last reservation is: " + refIdOfLastReservation);
       })
       .catch(function (error) {
         console.log(error);
@@ -37,6 +39,7 @@ export default function PostGuestAndReservationData(props: IPostGuestAndReservat
       sendGuestAndReservationData();
       props.setReserveTo();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.reserve]);
 
   return <></>;
