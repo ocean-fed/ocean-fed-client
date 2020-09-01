@@ -52,6 +52,8 @@ export default function Reservation() {
 
   
 
+  //function receiveGuestDataFromReservationInputs(nameOfGuest: string, emailOfGuest: string, phoneOfGuest: string) {}
+
   return (
     <>
     <main>

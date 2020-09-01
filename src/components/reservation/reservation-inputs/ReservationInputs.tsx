@@ -1,12 +1,19 @@
 import React, { useReducer, FormEvent, ChangeEvent } from "react";
 
+/* export interface IReservationInputsProps {
+  name: string;
+  email: string;
+  phone: string;
+  postGuestInfo(): void;
+} */
+
 export interface GuestInput {
   name: string;
   email: string;
   phone: string;
 }
 
-export default function ReservationInputs() {
+export default function ReservationInputs(/* props: IReservationInputsProps */) {
   let defaultValue: GuestInput = {
     name: '',
     email: '',
@@ -19,12 +26,12 @@ export default function ReservationInputs() {
   function postGuestInfo(e: FormEvent) {
     e.preventDefault();
 
+    setFormValue({...defaultValue})
+
     console.log(formValue)
     //console.log(JSON.stringify(formValue))
 
     //fetch('', JSON.stringify(formValue));
-
-    //formValue.setState('')
 
   }
 
