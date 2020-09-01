@@ -54,6 +54,8 @@ export default function Reservation() {
     setGetAvailableTimesByDate(true);
   }
 
+  //function receiveGuestDataFromReservationInputs(nameOfGuest: string, emailOfGuest: string, phoneOfGuest: string) {}
+
   return (
     <>
     <main>
