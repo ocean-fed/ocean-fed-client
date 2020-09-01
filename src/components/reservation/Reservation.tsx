@@ -7,12 +7,13 @@ import Search from "./search/Search";
 
 export default function Reservation() {
 
-  const mockNumOfSeats: number = 6;
-
+  const mockNumOfSeats: number = 6; // can disappear when we have ReservationInputs done
   const [numOfSeats, setNumOfSeats] = useState(0);
-  
+
   const mockDate: string = "1985-02-08";
   const [date, setDate] = useState("");
+  
+  const [getAvailableTimesByDate, setGetAvailableTimesByDate] = useState(false);
 
   const defaultAvailableTimes: String[] = [];
   const [availableTimes, setAvailableTimes] = useState(defaultAvailableTimes);
@@ -25,7 +26,18 @@ export default function Reservation() {
   const [reserve, setReserve] = useState(false);
   const [guestData, setGuestData] = useState({ name: "", email: "", phone: "" });
 
-  const [getAvailableTimesByDate, setGetAvailableTimesByDate] = useState(false);
+
+  function updateNumOfSeatsAndDate(numOfSeatsFromSearch: number, dateFromSearch: string) {
+    setNumOfSeats(numOfSeatsFromSearch);
+    setDate(dateFromSearch);
+    setGetAvailableTimesByDate(true);
+  }
+
+  function updateAvailableTimes(times: String[]) {
+    setAvailableTimes(times);
+    console.log("availableTimes:", availableTimes);
+  }
+
 
   function whenReservingFromMockReserveButton() {
     setGuestData(mockGuestData); 
@@ -35,46 +47,28 @@ export default function Reservation() {
     
     setReserve(true);
   }
-
-  /* function whenClickingOnMockGetAvailableTimesByDateButton() {
-    setDate(mockDate);
-    setNumOfSeats(mockNumOfSeats);
-
-    setGetAvailableTimesByDate(true);
-  } */
   
-  function updateAvailableTimes(times: String[]) {
-    setAvailableTimes(times);
-    console.log("availableTimes:", availableTimes);
-  }
 
-  function updateNumOfSeatsAndDate(numOfSeatsFromSearch: number, dateFromSearch: string) {
-    setNumOfSeats(numOfSeatsFromSearch);
-    setDate(dateFromSearch);
-    setGetAvailableTimesByDate(true);
-  }
+
+  
 
   return (
     <>
     <main>
-      <p>Reservation works.</p>
       <Search updateNumOfSeatsAndDate={updateNumOfSeatsAndDate}></Search>
-      <p>{numOfSeats}, {date}, {JSON.stringify(getAvailableTimesByDate)}</p>
-      <br />
+      <p>Saved values and getAvailableTimesByDate (boolean): <br />
+      {numOfSeats}, {date}, {JSON.stringify(getAvailableTimesByDate)}</p>
       <br />
       <hr/>
+      <GetAvailableTimes numOfSeats={numOfSeats} date={date} setGetAvailableTimesByDate={() => setGetAvailableTimesByDate(!getAvailableTimesByDate)} getAvailableTimesByDate={getAvailableTimesByDate} updateAvailableTimes={updateAvailableTimes}></GetAvailableTimes>
 
-
+      <p>{JSON.stringify(availableTimes)}</p>
+      <hr/>
 
       <ReservationInputs></ReservationInputs>
     </main>
     <br/>
     <br/>
-    {/* <button type="button" onClick={() => { whenClickingOnMockGetAvailableTimesByDateButton() }}>MockGetAvailableTimesByDate</button><br/> */}
-    <hr/>
-    <GetAvailableTimes numOfSeats={numOfSeats} date={date} setGetAvailableTimesByDate={() => setGetAvailableTimesByDate(!getAvailableTimesByDate)} getAvailableTimesByDate={getAvailableTimesByDate} updateAvailableTimes={updateAvailableTimes}></GetAvailableTimes>
-    <p>{JSON.stringify(availableTimes)}</p>
-    <hr/>
 
     <button type="button" onClick={() => { whenReservingFromMockReserveButton() }}>MockReserve</button>
 

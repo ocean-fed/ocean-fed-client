@@ -30,7 +30,7 @@ export default function Search(props: ISearchProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Sök Efter Platser</h1>
+      <h3>Sök Efter Platser</h3>
       <label>
         Antal Gäster:
         <input
@@ -39,6 +39,7 @@ export default function Search(props: ISearchProps) {
           value={numOfSeats}
           onChange={updateNumOfSeats}
           required
+          autoFocus
         />
       </label>
       <br/>

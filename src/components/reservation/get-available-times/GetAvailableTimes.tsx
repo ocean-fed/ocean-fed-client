@@ -15,6 +15,7 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
 
 
   function getReservationsByDate() {
+    console.log("getReservationsByDate starts");
     const reservationsByDateUrl = "http://localhost:4000/reservations-by-date";
 
     axios({
@@ -51,7 +52,7 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
         return;
       } else {
         console.log("more than 90!");
-        props.updateAvailableTimes(["hello"]);
+        props.updateAvailableTimes(["max capacity 90 reached! dev msg"]);
         return;
       }
 
@@ -83,6 +84,7 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
       getReservationsByDate();
       props.setGetAvailableTimesByDate();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.getAvailableTimesByDate]);
     
   return (<></>);
