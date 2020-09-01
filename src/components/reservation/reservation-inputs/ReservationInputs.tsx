@@ -1,64 +1,51 @@
 import React, { useReducer, FormEvent, ChangeEvent } from "react";
+import Guest from "../../../models/Guest";
 
-/* export interface IReservationInputsProps {
-  name: string;
-  email: string;
-  phone: string;
-  postGuestInfo(): void;
-} */
-
-export interface GuestInput {
-  name: string;
-  email: string;
-  phone: string;
+export interface IReservationInputsProps {
+  sendGuestData(guestData: Guest): void;
+  toggleReserve(): void;
 }
 
-export default function ReservationInputs(/* props: IReservationInputsProps */) {
-  let defaultValue: GuestInput = {
-    name: '',
-    email: '',
-    phone: ''
-  };
-  const [formValue, setFormValue] = useReducer(
-    (state: GuestInput, newState: GuestInput) => ({ ...state, ...newState }), defaultValue
-  );
 
-  function postGuestInfo(e: FormEvent) {
-    e.preventDefault();
+export default function ReservationInputs(props: IReservationInputsProps) {
+  
+  let defaultValue: Guest = new Guest();
 
-    setFormValue({...defaultValue})
+  const [guestFormValue, setGuestFormValue] = useReducer((state: Guest, newState: Guest) => {
+      return ({ ...state, ...newState });
+    }, defaultValue);
+  
+  function update(e: ChangeEvent<HTMLInputElement>) {
+    let name = e.target.name; 
+    let value = e.target.value;
 
-    console.log(formValue)
-    //console.log(JSON.stringify(formValue))
-
-    //fetch('', JSON.stringify(formValue));
-
+    setGuestFormValue({[name]: value} as any);
   }
 
-  //Only using 3 input elements, therefor <HTMLInputElements> is fine. Use <any> if multiple types of elements are used in form.
-  function update(e: ChangeEvent<HTMLInputElement>) {
-    let name = e.target.name; //finding chosen input "name" in our form. 
-    let value = e.target.value; //value of input
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    props.sendGuestData(guestFormValue);
+    setGuestFormValue(defaultValue);
+    props.toggleReserve();
 
-    setFormValue({ [name]: value } as any);
+    console.log(guestFormValue);
+
   }
 
   return (
     <div>
-      <form onSubmit={postGuestInfo}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Namn: </label>
-        <input type="text" id="name" value={formValue.name} name="name" onChange={update} />
-
+        <input type="text" id="name" value={guestFormValue.name} name="name" onChange={update} autoFocus/>
+        <br/>
         <label htmlFor="email">E-post: </label>
-        <input type="text" id="email" value={formValue.email} name="email" onChange={update}></input>
-
+        <input type="text" id="email" value={guestFormValue.email} name="email" onChange={update}></input>
+        <br/>
         <label htmlFor="phone">Telefonnummer: </label>
-        <input type="text" id="phone" value={formValue.phone} name="phone" onChange={update}></input>
+        <input type="text" id="phone" value={guestFormValue.phone} name="phone" onChange={update}></input>
+        <br/>
         <button type="submit">BOKA</button>
-
-        <p>
-          {JSON.stringify(formValue)}
-        </p>
+        <br/>
       </form>
     </div>
   );

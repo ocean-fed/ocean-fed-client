@@ -1,7 +1,9 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
+import "./Search.scss";
 
 export interface ISearchProps {
   updateNumOfSeatsAndDate(numOfSeats: number, date: string): void;
+  toggleGetAvailableTimesByDate(): void;
 }
 
 export default function Search(props: ISearchProps) {
@@ -21,6 +23,7 @@ export default function Search(props: ISearchProps) {
     event.preventDefault();
     let numOfSeatsAsANumber = Number(numOfSeats);
     props.updateNumOfSeatsAndDate(numOfSeatsAsANumber, date);
+    props.toggleGetAvailableTimesByDate();
     console.log(`
       Sent from Search the following:
       numOfSeats: ${numOfSeats}
@@ -32,7 +35,7 @@ export default function Search(props: ISearchProps) {
     <form onSubmit={handleSubmit}>
       <h3>Sök Efter Platser</h3>
       <label>
-        Antal Gäster:
+        Antal Gäster: 
         <input
           name="numOfSeats"
           type="number"
@@ -44,7 +47,7 @@ export default function Search(props: ISearchProps) {
       </label>
       <br/>
       <label>
-        Datum:
+        Datum: 
         <input
           name="date"
           type="date"

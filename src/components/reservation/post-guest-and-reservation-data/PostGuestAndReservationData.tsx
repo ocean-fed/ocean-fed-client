@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import Guest from "../../../models/Guest";
 
-interface IPostGuestAndReservationData {
+export interface IPostGuestAndReservationData {
   reserve: boolean;
-  setReserveTo(): void;
+  toggleReserve(): void;
   guestData: Guest;
   chosenTime: string;
   date: string;
   numOfSeats: number;
+  confirmReservation(): void;
 }
 
 export default function PostGuestAndReservationData(props: IPostGuestAndReservationData) {
@@ -28,6 +29,7 @@ export default function PostGuestAndReservationData(props: IPostGuestAndReservat
         console.log(response.data);
         const refIdOfLastReservation = response.data.reservationsDB[response.data.reservationsDB.length-1].refId;
         console.log("refId of the last reservation is: " + refIdOfLastReservation);
+        props.confirmReservation();
       })
       .catch(function (error) {
         console.log(error);
@@ -37,7 +39,7 @@ export default function PostGuestAndReservationData(props: IPostGuestAndReservat
   useEffect(() => {
     if (props.reserve) {
       sendGuestAndReservationData();
-      props.setReserveTo();
+      props.toggleReserve();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.reserve]);
