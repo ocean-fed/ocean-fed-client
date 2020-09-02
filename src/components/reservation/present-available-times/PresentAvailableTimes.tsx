@@ -4,6 +4,7 @@ import "./PresentAvailableTimes.scss";
 export interface IPresentAvailableTimes {
   availableTimes: string[];
   updateChosenTime(chosenTime: string): void;
+  presentAvailableTimes: boolean;
 }
 
 export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
@@ -17,9 +18,16 @@ export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
     console.log("updated chosenTime: ", chosenTime);
   }
 
-  return (
-    <>
-      <ul>{availableTimesElements}</ul>
-    </>
-  );
+  // not clear
+  if (props.presentAvailableTimes) {
+    return (
+      <>
+        <ul>{availableTimesElements}</ul>
+      </>
+    );
+  }
+  if (props.availableTimes.length > 0) {
+    return (<><p>Det finns inget bord kvar. Vänligen sök igen.</p></>);
+  }
+  return (<></>);
 }

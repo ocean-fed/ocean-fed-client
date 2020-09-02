@@ -4,8 +4,8 @@ import Guest from "../../../models/Guest";
 export interface IReservationInputsProps {
   sendGuestData(guestData: Guest): void;
   toggleReserve(): void;
+  toggleCancelled(): void;
 }
-
 
 export default function ReservationInputs(props: IReservationInputsProps) {
   
@@ -27,25 +27,28 @@ export default function ReservationInputs(props: IReservationInputsProps) {
     props.sendGuestData(guestFormValue);
     setGuestFormValue(defaultValue);
     props.toggleReserve();
+  }
 
-    console.log(guestFormValue);
-
+  function handleCancel() {
+    props.toggleCancelled();
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Namn: </label>
-        <input type="text" id="name" value={guestFormValue.name} name="name" onChange={update} autoFocus/>
+        <input type="text" id="name" value={guestFormValue.name} name="name" onChange={update} autoFocus required/>
         <br/>
         <label htmlFor="email">E-post: </label>
-        <input type="text" id="email" value={guestFormValue.email} name="email" onChange={update}></input>
+        <input type="text" id="email" value={guestFormValue.email} name="email" onChange={update} required></input>
         <br/>
-        <label htmlFor="phone">Telefonnummer: </label>
+        <label htmlFor="phone">Telefonnummer (valfritt): </label>
         <input type="text" id="phone" value={guestFormValue.phone} name="phone" onChange={update}></input>
         <br/>
+        <p>GDPR</p>
+        <button type="button" onClick={() => handleCancel()}>AVBRYT</button>
+        &nbsp;
         <button type="submit">BOKA</button>
-        <br/>
       </form>
     </div>
   );

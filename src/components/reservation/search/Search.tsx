@@ -4,12 +4,16 @@ import "./Search.scss";
 export interface ISearchProps {
   updateNumOfSeatsAndDate(numOfSeats: number, date: string): void;
   toggleGetAvailableTimesByDate(): void;
+  togglePresentAvailableTimes(): void;
+  searchWithSavedValues: boolean;
+  numOfSeats: number;
+  date: string;
 }
 
 export default function Search(props: ISearchProps) {
 
-  const [numOfSeats, setNumOfSeats] = useState("");
-  const [date, setDate] = useState("");
+  const [numOfSeats, setNumOfSeats] = useState(props.searchWithSavedValues ? props.numOfSeats : "");
+  const [date, setDate] = useState(props.searchWithSavedValues ? props.date : "");
 
   function updateNumOfSeats(e: ChangeEvent<HTMLInputElement>) {
     setNumOfSeats(e.target.value);
@@ -24,6 +28,7 @@ export default function Search(props: ISearchProps) {
     let numOfSeatsAsANumber = Number(numOfSeats);
     props.updateNumOfSeatsAndDate(numOfSeatsAsANumber, date);
     props.toggleGetAvailableTimesByDate();
+    props.togglePresentAvailableTimes();
     console.log(`
       Sent from Search the following:
       numOfSeats: ${numOfSeats}
@@ -33,23 +38,26 @@ export default function Search(props: ISearchProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Sök Efter Platser</h3>
-      <label>
+      <h3>Sök efter tillgängliga tider</h3>
+      <label htmlFor="numofseats">
         Antal Gäster: 
+        </label>
         <input
           name="numOfSeats"
+          id="numOfSeats"
           type="number"
           value={numOfSeats}
           onChange={updateNumOfSeats}
           required
           autoFocus
         />
-      </label>
+      
       <br/>
-      <label>
+      <label htmlFor="date">
         Datum: 
         <input
           name="date"
+          id="date"
           type="date"
           value={date}
           onChange={updateDate}
@@ -57,7 +65,7 @@ export default function Search(props: ISearchProps) {
         />
       </label>
       <br/>
-      <button type="submit">Submit</button>
+      <button type="submit">Sök</button>
     </form>
   );
 }

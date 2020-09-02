@@ -55,8 +55,8 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
         // later on the value sent below should be an empty array, and perhaps another props function should send why there is no times available so that PresentAvailableTimes present the right validation message.
         props.updateAvailableTimes(["max capacity 90 reached! (dev msg)"]);
         return;
-      }
 
+      }
     } else {
 
       deduceAvailableTimes(reservationData);
