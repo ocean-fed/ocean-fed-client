@@ -4,7 +4,6 @@ import "./Search.scss";
 export interface ISearchProps {
   updateNumOfSeatsAndDate(numOfSeats: number, date: string): void;
   toggleGetAvailableTimesByDate(): void;
-  togglePresentAvailableTimes(): void;
   searchWithSavedValues: boolean;
   numOfSeats: number;
   date: string;
@@ -28,7 +27,6 @@ export default function Search(props: ISearchProps) {
     let numOfSeatsAsANumber = Number(numOfSeats);
     props.updateNumOfSeatsAndDate(numOfSeatsAsANumber, date);
     props.toggleGetAvailableTimesByDate();
-    props.togglePresentAvailableTimes();
     console.log(`
       Sent from Search the following:
       numOfSeats: ${numOfSeats}

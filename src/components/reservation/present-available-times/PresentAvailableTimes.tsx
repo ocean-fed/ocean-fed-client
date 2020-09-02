@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./PresentAvailableTimes.scss";
 
 export interface IPresentAvailableTimes {
   availableTimes: string[];
   updateChosenTime(chosenTime: string): void;
   presentAvailableTimes: boolean;
+  maxCapacityReached: boolean;
+  toggleMaxCapacityReached(): void;
 }
 
 export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
+
+  const warningMessages = {
+    notAvailable: "Det finns inget bord kvar. Vänligen sök igen.",
+    maxCapacityReached: "Om ni vill boka för mer än 90 gäster vänligen kontakta oss via telefonnummer: [tel?]."
+  }
+
+  const [warningMessage, setWarningMessage] = useState(warningMessages.notAvailable);
 
   const availableTimesElements = props.availableTimes.map(availableTime => {
     return <li key={availableTime}><button type="button" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</button></li>;
@@ -18,16 +27,21 @@ export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
     console.log("updated chosenTime: ", chosenTime);
   }
 
-  // not clear
-  if (props.presentAvailableTimes) {
-    return (
-      <>
-        <ul>{availableTimesElements}</ul>
-      </>
-    );
+  useEffect(() => {
+    if (props.maxCapacityReached) {
+      setWarningMessage(warningMessages.maxCapacityReached);
+      return props.toggleMaxCapacityReached();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.maxCapacityReached]);
+
+  if (props.presentAvailableTimes && props.availableTimes.length > 0) {
+    return (<><ul>{availableTimesElements}</ul></>);
   }
-  if (props.availableTimes.length > 0) {
-    return (<><p>Det finns inget bord kvar. Vänligen sök igen.</p></>);
+
+  if (props.presentAvailableTimes && props.availableTimes.length === 0) {
+    return (<><p>{warningMessage}</p></>)
   }
+
   return (<></>);
 }
