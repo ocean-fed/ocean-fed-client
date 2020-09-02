@@ -1,7 +1,7 @@
 import React from "react";
-import "./Search.scss";
+import "./Gdpr.scss";
 
-export default function Contact() {
+export default function Gdpr() {
   return (
     <main>
       <h3>INTEGRITETSINFORMATION FÖR BOKNING AV BORD PÅ L'OCEAN</h3>
