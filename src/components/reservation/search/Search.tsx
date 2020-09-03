@@ -1,4 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
+import { Button, TextField } from "@material-ui/core";
 import "./Search.scss";
 
 export interface ISearchProps {
@@ -10,7 +11,6 @@ export interface ISearchProps {
 }
 
 export default function Search(props: ISearchProps) {
-
   const [numOfSeats, setNumOfSeats] = useState(props.searchWithSavedValues ? props.numOfSeats : "");
   const [date, setDate] = useState(props.searchWithSavedValues ? props.date : "");
 
@@ -37,33 +37,23 @@ export default function Search(props: ISearchProps) {
   return (
     <form onSubmit={handleSubmit}>
       <h3>Sök efter tillgängliga tider</h3>
-      <label htmlFor="numofseats">
-        Antal Gäster: 
-        </label>
-        <input
-          name="numOfSeats"
-          id="numOfSeats"
-          type="number"
-          value={numOfSeats}
-          onChange={updateNumOfSeats}
-          required
-          autoFocus
-        />
+      <TextField
+        name="numOfSeats"
+        id="numOfSeats"
+        type="number"
+        label="Antal Gäster: "
+        value={numOfSeats}
+        onChange={updateNumOfSeats}
+        required
+        autoFocus
+      />
+      <br/>
       
       <br/>
-      <label htmlFor="date">
-        Datum: 
-        <input
-          name="date"
-          id="date"
-          type="date"
-          value={date}
-          onChange={updateDate}
-          required
-        />
-      </label>
-      <br/>
-      <button type="submit">Sök</button>
+      
+      <TextField name="date" id="date" label="Datum: " type="date" value={date} onChange={updateDate} required />
+      <br />
+      <Button type="submit">Sök</Button>
     </form>
   );
 }
