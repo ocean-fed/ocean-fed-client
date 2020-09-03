@@ -1,8 +1,7 @@
 import React from "react";
 import "./Gdpr.scss";
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+import { Modal, Button } from '@material-ui/core';
 
 function getModalStyle() {
   const top = 50;
