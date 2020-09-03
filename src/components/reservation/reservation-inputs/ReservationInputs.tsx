@@ -1,6 +1,5 @@
 import React, { useReducer, FormEvent, ChangeEvent } from "react";
 import Guest from "../../../models/Guest";
-import Gdpr from "./gdpr/Gdpr";
 
 export interface IReservationInputsProps {
   sendGuestData(guestData: Guest): void;
@@ -36,7 +35,6 @@ export default function ReservationInputs(props: IReservationInputsProps) {
 
   return (
     <div>
-      <Gdpr></Gdpr>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Namn: </label>
         <input type="text" id="name" value={guestFormValue.name} name="name" onChange={update} autoFocus required/>
