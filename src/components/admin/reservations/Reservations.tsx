@@ -9,13 +9,14 @@ export default function Reservations() {
 
   const reservationsAsRows = reservations.map((reservation: Reservation) => {
     return (
-      <>
-        <tr>{reservation.refId}</tr>
-        <tr>{reservation.date}</tr>
-        <tr>{reservation.time}</tr>
-        <tr>{reservation.seats}</tr>
-        <tr>{reservation.guestId}</tr>
-      </>
+        <tr key={reservation.refId}>
+          <td>{reservation.refId}</td>
+          <td>{reservation.date}</td>
+          <td>{reservation.time}</td>
+          <td>{reservation.seats}</td>
+          <td>{reservation.guestId}</td>
+          <td>&nbsp;</td>
+        </tr>
     );
   });
 
@@ -40,6 +41,7 @@ export default function Reservations() {
             <th>tid</th>
             <th>gäster</th>
             <th>namn, email, telefon</th>
+            <th>actions</th>
           </tr>
         </thead>
         <tbody>{reservationsAsRows}</tbody>
