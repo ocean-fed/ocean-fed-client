@@ -65,7 +65,6 @@ export default function Gdpr() {
           <h5>Vem har tillgång till dina personuppgifter?</h5>
           <p>Endast den bokningsansvarige på vår hemsida kan ta del av din information.</p>
           <p>2/9 2020</p>
-
           <Button variant="outlined" onClick={handleClose}>Ok</Button>
         </div>
       </Modal>

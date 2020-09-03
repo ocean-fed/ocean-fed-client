@@ -1,6 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Button, TextField } from "@material-ui/core";
 import "./Search.scss";
 
 export interface ISearchProps {
@@ -12,7 +11,6 @@ export interface ISearchProps {
 }
 
 export default function Search(props: ISearchProps) {
-
   const [numOfSeats, setNumOfSeats] = useState(props.searchWithSavedValues ? props.numOfSeats : "");
   const [date, setDate] = useState(props.searchWithSavedValues ? props.date : "");
 
