@@ -1,4 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import "./Search.scss";
 
 export interface ISearchProps {
@@ -37,33 +39,34 @@ export default function Search(props: ISearchProps) {
   return (
     <form onSubmit={handleSubmit}>
       <h3>Sök efter tillgängliga tider</h3>
-      <label htmlFor="numofseats">
-        Antal Gäster: 
-        </label>
-        <input
+        <TextField
           name="numOfSeats"
           id="numOfSeats"
+          label="Antal Gäster:"
           type="number"
           value={numOfSeats}
           onChange={updateNumOfSeats}
+          InputLabelProps={{
+            shrink: true,
+          }}
           required
           autoFocus
         />
-      
       <br/>
-      <label htmlFor="date">
-        Datum: 
-        <input
-          name="date"
-          id="date"
-          type="date"
-          value={date}
-          onChange={updateDate}
-          required
-        />
-      </label>
+      <TextField
+        name="date"
+        id="date"
+        label="Datum:"
+        type="date"
+        value={date}
+        onChange={updateDate}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        required
+      />
       <br/>
-      <button type="submit">Sök</button>
+      <Button type="submit" variant="outlined">Sök</Button>
     </form>
   );
 }
