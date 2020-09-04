@@ -38,16 +38,13 @@ export default function ReservationInputs(props: IReservationInputsProps) {
   }
 
   return (
-    <div className="reservation-inputs">
+    <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Namn: </label>
-        <TextField type="text" id="name" value={guestFormValue.name} name="name" onChange={update} autoFocus required />
+        <TextField type="text" id="name" label="Namn:" InputLabelProps={{ shrink: true }} value={guestFormValue.name} name="name" onChange={update} autoFocus required />
         <br/>
-        <label htmlFor="email">E-post: </label>
-        <TextField type="text" id="email" value={guestFormValue.email} name="email" onChange={update} required />
+        <TextField type="text" id="email" label="E-post:" InputLabelProps={{ shrink: true }} value={guestFormValue.email} name="email" onChange={update} required />
         <br/>
-        <label htmlFor="phone">Telefonnummer (valfritt): </label>
-        <TextField type="text" id="phone" value={guestFormValue.phone} name="phone" onChange={update} />
+        <TextField type="text" id="phone" label="Telefonnummer (valfritt):" InputLabelProps={{ shrink: true }} value={guestFormValue.phone} name="phone" onChange={update} />
         <br/>
         <code>{JSON.stringify(guestFormValue)}</code>
         <Gdpr></Gdpr>
