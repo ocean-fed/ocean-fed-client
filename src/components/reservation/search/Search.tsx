@@ -37,20 +37,20 @@ export default function Search(props: ISearchProps) {
   return (
     <form onSubmit={handleSubmit}>
       <h3>Sök efter tillgängliga tider</h3>
-        <TextField
-          name="numOfSeats"
-          id="numOfSeats"
-          label="Antal Gäster:"
-          type="number"
-          value={numOfSeats}
-          onChange={updateNumOfSeats}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          required
-          autoFocus
-        />
-      <br/>
+      <TextField
+        name="numOfSeats"
+        id="numOfSeats"
+        label="Antal Gäster:"
+        type="number"
+        value={numOfSeats}
+        onChange={updateNumOfSeats}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        required
+        autoFocus
+      />
+      <br />
       <TextField
         name="date"
         id="date"
@@ -63,8 +63,10 @@ export default function Search(props: ISearchProps) {
         }}
         required
       />
-      <br/>
-      <Button type="submit" variant="outlined">Sök</Button>
+      <br />
+      <Button type="submit" variant="outlined">
+        Sök
+      </Button>
     </form>
   );
 }
