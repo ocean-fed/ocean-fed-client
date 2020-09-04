@@ -30,18 +30,18 @@ function App() {
         </nav>
       </header>
       <Switch>
-        <Route path="/reservation">
-          <Reservation />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/admin">
-          <Admin />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+          <Route path="/reservation">
+            <Reservation />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/admin">
+            <Admin />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
       </Switch>
     </Router>
   );

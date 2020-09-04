@@ -5,8 +5,11 @@ import Reservation from "../../../models/Reservation";
 import Actions from "./actions/Actions";
 import GetGuests from "./get-guests/GetGuests";
 import Guest from "../../../models/Guest";
+import GuestInfo from "./guest-info/GuestInfo";
+import DeleteReservation from "./delete-reservation/DeleteReservation";
 
 export default function Reservations() {
+
   const defaultReservations: Reservation[] = [];
   const [reservations, setReservations] = useState(defaultReservations);
 
@@ -16,6 +19,8 @@ export default function Reservations() {
   const [reservationsIsFetched, setReservationsIsFetched] = useState(false);
   const [guestsIsFetched, setGuestsIsFetched] = useState(false);
 
+  const [refIdOfReservationToDelete, setRefIdOfReservationToDelete] = useState(0);
+
   const reservationsAsRows = reservations.map((reservation: Reservation) => {
     return (
       <tr key={reservation.refId}>
@@ -23,20 +28,23 @@ export default function Reservations() {
         <td>{reservation.date}</td>
         <td>{reservation.time}</td>
         <td>{reservation.seats}</td>
-        <td></td>
         <td>
-          <Actions reservation={reservation}></Actions>
+          <GuestInfo
+            name={reservation.guestInfo?.name}
+            email={reservation.guestInfo?.email}
+            phone={reservation.guestInfo?.phone}
+          ></GuestInfo>
+        </td>
+        <td>
+          <Actions reservation={reservation} sendDeleteReservation={deleteReservation}></Actions>
         </td>
       </tr>
     );
   });
 
-
-
   function updateReservations(reservationsData: Reservation[]) {
     setReservations(reservationsData);
   }
-
   function toggleReservationsIsFetched() {
     setReservationsIsFetched(!reservationsIsFetched);
   }
@@ -44,45 +52,33 @@ export default function Reservations() {
   function updateGuests(guestsData: Guest[]) {
     setGuests(guestsData);
   }
-
   function toggleGuestsIsFetched() {
     setGuestsIsFetched(!guestsIsFetched);
   }
 
   function insertGuestInfosIntoReservations() {
+    const guestIds = guests.map((guest) => guest._id);
 
-    console.log(reservations);
-    console.log(guests);
-
-    // for each reservations, check if there is a match between guestId from reservation and _id from guests
-    // if there is (filter) push all guest object to reservation.guestInfo
-
-    // HERE
-
-    let reservationsWithGuestInfos: Reservation[] = [];
-    
-    reservations.forEach((reservation: Reservation) => {
-      let theGuestInfo = guests.filter((guest: Guest) => {
-        return guest._id === reservation.guestId;
-      });
-      let guestInfo: Guest = new Guest();
-      guestInfo.name = theGuestInfo[0].name;
-      guestInfo.email = theGuestInfo[0].email;
-      guestInfo.phone = theGuestInfo[0].phone;
-
-      reservation.guestInfo = guestInfo;
+    let reservationsWithGuestInfos: Reservation[] = reservations.map((reservation) => {
+      let rightIndex = guestIds.indexOf(reservation.guestId);
+      reservation.guestInfo = guests[rightIndex];
+      return reservation;
     });
 
-    console.log(reservationsWithGuestInfos);
+    setReservations(reservationsWithGuestInfos);
+  }
 
-
+  function deleteReservation(reservation: Reservation) {
+    console.log("wanted to delete this? : ", reservation);
+    setRefIdOfReservationToDelete(reservation.refId);
   }
 
   useEffect(() => {
     if (reservationsIsFetched && guestsIsFetched) {
       insertGuestInfosIntoReservations();
     }
-  }, [reservationsIsFetched, guestsIsFetched])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reservationsIsFetched, guestsIsFetched]);
 
   return (
     <>
@@ -106,8 +102,11 @@ export default function Reservations() {
         toggleReservationsIsFetched={toggleReservationsIsFetched}
         updateReservations={updateReservations}
       ></GetReservations>
-      <GetGuests toggleGuestsIsFetched={toggleGuestsIsFetched}
-        updateGuests={updateGuests}></GetGuests>
+      <GetGuests
+        toggleGuestsIsFetched={toggleGuestsIsFetched}
+        updateGuests={updateGuests}
+      ></GetGuests>
+      <DeleteReservation refIdOfReservationToDelete={refIdOfReservationToDelete}></DeleteReservation>
     </>
   );
 }

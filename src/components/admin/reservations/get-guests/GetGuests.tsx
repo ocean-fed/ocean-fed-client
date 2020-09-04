@@ -30,7 +30,7 @@ export default function GetGuests(props: IGetGuests) {
       console.log(error);
     });
   }
-  
+
   useEffect(() => {
     getGuests();
   // eslint-disable-next-line react-hooks/exhaustive-deps

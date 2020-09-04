@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.scss";
 import AddReservation from "./add-reservation/AddReservation";
 import Reservation from "../reservation/Reservation";
@@ -14,7 +14,9 @@ export default function Admin() {
   if (showReservation) {
     return (
       <main>
-        <div className="reservation"><Reservation></Reservation></div>
+        <div className="reservation">
+          <Reservation></Reservation>
+        </div>
         <Reservations></Reservations>
       </main>
     );

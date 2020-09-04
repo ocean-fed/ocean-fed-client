@@ -5,6 +5,6 @@ export default class Reservation {
   date: string = "";
   time: string = "";
   seats: number = 0;
-  guestId?: string = "";
-  guestInfo?: Guest = { name: "", email: "", phone: ""};
+  guestId?: string;
+  guestInfo?: Guest;
 }
