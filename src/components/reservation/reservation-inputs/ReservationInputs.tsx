@@ -1,6 +1,7 @@
 import React, { useReducer, FormEvent, ChangeEvent } from "react";
 import Guest from "../../../models/Guest";
 import Gdpr from "./gdpr/Gdpr";
+import Button from '@material-ui/core/Button';
 
 export interface IReservationInputsProps {
   sendGuestData(guestData: Guest): void;
@@ -36,7 +37,6 @@ export default function ReservationInputs(props: IReservationInputsProps) {
 
   return (
     <div>
-      <Gdpr></Gdpr>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Namn: </label>
         <input type="text" id="name" value={guestFormValue.name} name="name" onChange={update} autoFocus required/>
@@ -47,9 +47,11 @@ export default function ReservationInputs(props: IReservationInputsProps) {
         <label htmlFor="phone">Telefonnummer (valfritt): </label>
         <input type="text" id="phone" value={guestFormValue.phone} name="phone" onChange={update}></input>
         <br/>
-        <button type="button" onClick={() => handleCancel()}>AVBRYT</button>
+        <Gdpr></Gdpr>
+        <br/>
+        <Button type="button" variant="outlined" onClick={() => handleCancel()}>AVBRYT</Button>
         &nbsp;
-        <button type="submit">BOKA</button>
+        <Button type="submit" variant="outlined">BOKA</Button>
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./PresentAvailableTimes.scss";
+import Button from '@material-ui/core/Button';
 
 export interface IPresentAvailableTimes {
   availableTimes: string[];
@@ -19,7 +20,7 @@ export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
   const [warningMessage, setWarningMessage] = useState(warningMessages.notAvailable);
 
   const availableTimesElements = props.availableTimes.map(availableTime => {
-    return <li key={availableTime}><button type="button" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</button></li>;
+    return <li key={availableTime}><Button type="button" variant="outlined" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</Button></li>;
   });
 
   function sendChosenTime(chosenTime: string) {
