@@ -8,10 +8,15 @@ import Guest from "../../../models/Guest";
 import GuestInfo from "./guest-info/GuestInfo";
 import DeleteReservation from "./delete-reservation/DeleteReservation";
 
-export default function Reservations() {
+export interface IReservations {
+  reservations: Reservation[];
+  updateReservations(reservationData: Reservation[]): void;
+  refreshReservations: boolean;
+}
 
-  const defaultReservations: Reservation[] = [];
-  const [reservations, setReservations] = useState(defaultReservations);
+export default function Reservations(props: IReservations) {
+
+/*   const [reservations, setReservations] = useState(props.reservations); */
 
   const defaultGuests: Guest[] = [];
   const [guests, setGuests] = useState(defaultGuests);
@@ -21,7 +26,7 @@ export default function Reservations() {
 
   const [refIdOfReservationToDelete, setRefIdOfReservationToDelete] = useState(0);
 
-  const reservationsAsRows = reservations.map((reservation: Reservation) => {
+  const reservationsAsRows = props.reservations.map((reservation: Reservation) => {
     return (
       <tr key={reservation.refId}>
         <td>{reservation.refId}</td>
@@ -43,7 +48,7 @@ export default function Reservations() {
   });
 
   function updateReservations(reservationsData: Reservation[]) {
-    setReservations(reservationsData);
+    props.updateReservations(reservationsData);
   }
   function toggleReservationsIsFetched() {
     setReservationsIsFetched(!reservationsIsFetched);
@@ -59,13 +64,14 @@ export default function Reservations() {
   function insertGuestInfosIntoReservations() {
     const guestIds = guests.map((guest) => guest._id);
 
-    let reservationsWithGuestInfos: Reservation[] = reservations.map((reservation) => {
+    let reservationsWithGuestInfos: Reservation[] = props.reservations.map((reservation) => {
       let rightIndex = guestIds.indexOf(reservation.guestId);
       reservation.guestInfo = guests[rightIndex];
       return reservation;
     });
 
-    setReservations(reservationsWithGuestInfos);
+    props.updateReservations(reservationsWithGuestInfos);
+/*     setReservations(reservationsWithGuestInfos); */
   }
 
   function deleteReservation(reservation: Reservation) {
@@ -79,6 +85,13 @@ export default function Reservations() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reservationsIsFetched, guestsIsFetched]);
+
+  useEffect(() => {
+    if (reservationsIsFetched && guestsIsFetched) {
+      insertGuestInfosIntoReservations();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.refreshReservations]);
 
   return (
     <>
@@ -101,10 +114,12 @@ export default function Reservations() {
       <GetReservations
         toggleReservationsIsFetched={toggleReservationsIsFetched}
         updateReservations={updateReservations}
+        refreshReservations={props.refreshReservations}
       ></GetReservations>
       <GetGuests
         toggleGuestsIsFetched={toggleGuestsIsFetched}
         updateGuests={updateGuests}
+        refreshReservations={props.refreshReservations}
       ></GetGuests>
       <DeleteReservation refIdOfReservationToDelete={refIdOfReservationToDelete}></DeleteReservation>
     </>

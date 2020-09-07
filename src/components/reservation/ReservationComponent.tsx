@@ -7,11 +7,15 @@ import Search from "./search/Search";
 import PresentAvailableTimes from "./present-available-times/PresentAvailableTimes";
 import PresentOngoingReservation from "./present-ongoing-reservation/PresentOngoingReservation";
 
-export default function Reservation() {
+export interface IReservationComponent {
+  toggleRefreshReservations(): void;
+}
+
+export default function ReservationComponent(props: IReservationComponent) {
 
   const [numOfSeats, setNumOfSeats] = useState(0);
   const [date, setDate] = useState("");
-  
+
   const [getAvailableTimesByDate, setGetAvailableTimesByDate] = useState(false);
   const [presentAvailableTimes, setPresentAvailableTimes] = useState(false);
 
@@ -19,13 +23,13 @@ export default function Reservation() {
   const [availableTimes, setAvailableTimes] = useState(defaultAvailableTimes);
 
   const [maxCapacityReached, setMaxCapacityReached] = useState(false);
-  
+
   const defaultChosenTime = "";
   const [chosenTime, setChosenTime] = useState(defaultChosenTime);
-  
+
   const defaultGuestData: Guest = new Guest();
   const [guestData, setGuestData] = useState(defaultGuestData);
-  
+
   const [reserve, setReserve] = useState(false);
 
   const [reservationConfirmed, setReservationConfirmed] = useState(false);
@@ -36,7 +40,7 @@ export default function Reservation() {
     setNumOfSeats(numOfSeatsFromSearch);
     setDate(dateFromSearch);
   }
-  
+
   function toggleGetAvailableTimesByDate() {
     setGetAvailableTimesByDate(true);
   }
@@ -68,6 +72,7 @@ export default function Reservation() {
 
   function confirmReservation() {
     setReservationConfirmed(true);
+    props.toggleRefreshReservations();
   }
 
   function presentSearchWithSavedValues() {
@@ -79,17 +84,17 @@ export default function Reservation() {
   if (reservationConfirmed) {
     return (<main>
       <h3>Du har bokat ett bord!</h3>
-    </main>)
+    </main>);
   }
-  
+
   if (chosenTime.length > 0) {
     return (
-    <main>
-    <PresentOngoingReservation numOfSeats={numOfSeats} date={date} chosenTime={chosenTime}></PresentOngoingReservation>
-    <ReservationInputs sendGuestData={updateGuestData} toggleReserve={makeAReservation} toggleCancelled={presentSearchWithSavedValues}></ReservationInputs>
-    <PostGuestAndReservationData reserve={reserve} toggleReserve={() => setReserve(!reserve)} guestData={guestData} chosenTime={chosenTime} date={date} numOfSeats={numOfSeats} confirmReservation={confirmReservation}></PostGuestAndReservationData>
-    </main>
-    )
+      <main>
+        <PresentOngoingReservation numOfSeats={numOfSeats} date={date} chosenTime={chosenTime}></PresentOngoingReservation>
+        <ReservationInputs sendGuestData={updateGuestData} toggleReserve={makeAReservation} toggleCancelled={presentSearchWithSavedValues}></ReservationInputs>
+        <PostGuestAndReservationData reserve={reserve} toggleReserve={() => setReserve(!reserve)} guestData={guestData} chosenTime={chosenTime} date={date} numOfSeats={numOfSeats} confirmReservation={confirmReservation}></PostGuestAndReservationData>
+      </main>
+    );
   }
 
   return (
@@ -98,6 +103,6 @@ export default function Reservation() {
       <GetAvailableTimes numOfSeats={numOfSeats} date={date} setGetAvailableTimesByDate={() => setGetAvailableTimesByDate(!getAvailableTimesByDate)} getAvailableTimesByDate={getAvailableTimesByDate} togglePresentAvailableTimes={togglePresentAvailableTimes} updateAvailableTimes={updateAvailableTimes} toggleMaxCapacityReached={toggleMaxCapacityReached}></GetAvailableTimes>
       <PresentAvailableTimes availableTimes={availableTimes} updateChosenTime={updateChosenTime} presentAvailableTimes={presentAvailableTimes} maxCapacityReached={maxCapacityReached} toggleMaxCapacityReached={toggleMaxCapacityReached}></PresentAvailableTimes>
     </main>
-  )
+  );
 
 }

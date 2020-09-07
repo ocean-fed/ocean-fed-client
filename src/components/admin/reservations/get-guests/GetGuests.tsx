@@ -5,6 +5,7 @@ import Guest from "../../../../models/Guest";
 export interface IGetGuests {
   toggleGuestsIsFetched(): void;
   updateGuests(reservationsData: Guest[]): void;
+  refreshReservations: boolean;
 }
 
 export default function GetGuests(props: IGetGuests) {
@@ -35,6 +36,13 @@ export default function GetGuests(props: IGetGuests) {
     getGuests();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (props.refreshReservations) {
+      getGuests();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.refreshReservations]);
 
   return (<></>);
 

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import "./App.scss";
 import Home from "./components/home/Home";
-import Reservation from "./components/reservation/Reservation";
+import ReservationComponent from "./components/reservation/ReservationComponent";
 import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
 
@@ -31,7 +31,7 @@ function App() {
       </header>
       <Switch>
           <Route path="/reservation">
-            <Reservation />
+            <ReservationComponent toggleRefreshReservations={() => { console.log("toggleRefreshReservations in reservation path.")}} />
           </Route>
           <Route path="/contact">
             <Contact />

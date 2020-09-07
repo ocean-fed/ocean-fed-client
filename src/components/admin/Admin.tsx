@@ -1,23 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Admin.scss";
 import AddReservation from "./add-reservation/AddReservation";
-import Reservation from "../reservation/Reservation";
+import ReservationComponent from "../reservation/ReservationComponent";
 import Reservations from "./reservations/Reservations";
+import Reservation from "../../models/Reservation";
 
 export default function Admin() {
+  const defaultReservations: Reservation[] = [];
+
+  const [reservations, setReservations] = useState(defaultReservations);
+
+  const [refreshReservations, setRefreshReservations] = useState(false);
+
   const [showReservation, setShowReservation] = useState(false);
+
+  function updateReservations(reservationData: Reservation[]) {
+    setReservations(reservationData);
+  }
 
   function toggleReservation() {
     setShowReservation(!showReservation);
+  }
+
+  function toggleRefreshReservations() {
+    setRefreshReservations(!refreshReservations);
   }
 
   if (showReservation) {
     return (
       <main>
         <div className="reservation">
-          <Reservation></Reservation>
+          <ReservationComponent toggleRefreshReservations={toggleRefreshReservations}></ReservationComponent>
         </div>
-        <Reservations></Reservations>
+        <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations}></Reservations>
       </main>
     );
   }
@@ -25,7 +40,7 @@ export default function Admin() {
   return (
     <main>
       <AddReservation showReservation={toggleReservation}></AddReservation>
-      <Reservations></Reservations>
+      <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations}></Reservations>
     </main>
   );
 }

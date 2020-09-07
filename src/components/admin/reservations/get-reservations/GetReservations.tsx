@@ -5,6 +5,7 @@ import Reservation from "../../../../models/Reservation";
 export interface IGetReservations {
   toggleReservationsIsFetched(): void;
   updateReservations(reservationsData: Reservation[]): void;
+  refreshReservations: boolean;
 }
 
 export default function GetReservations(props: IGetReservations) {
@@ -37,6 +38,13 @@ export default function GetReservations(props: IGetReservations) {
     getReservations();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (props.refreshReservations) {
+      getReservations();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.refreshReservations]);
 
   return (<></>);
 }
