@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Box } from "@material-ui/core";
 
 export interface IPresentOngoingReservation {
   numOfSeats: number;
@@ -19,8 +20,10 @@ export default function PresentOngoingReservation(props: IPresentOngoingReservat
 
   
   return (
-    <p>
-      — Du kommer att boka bord för {props.numOfSeats} {guestOrGuests} kl. {props.chosenTime} på följände datum: {props.date}.
-    </p>
+    <Box display="flex" justifyContent="center">
+      <p>
+        — Du kommer att boka bord för {props.numOfSeats} {guestOrGuests} kl. {props.chosenTime} på följände datum: {props.date}.
+      </p>
+    </Box>
   );
 }

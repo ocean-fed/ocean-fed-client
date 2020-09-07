@@ -43,7 +43,7 @@ export default function Gdpr() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>
+      <Button variant="outlined" onClick={handleOpen}>
         Gdpr
       </Button>
 

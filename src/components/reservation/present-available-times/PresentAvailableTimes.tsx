@@ -1,6 +1,6 @@
 import React from "react";
 import "./PresentAvailableTimes.scss";
-import Button from '@material-ui/core/Button';
+import { Box, Button } from "@material-ui/core";
 
 export interface IPresentAvailableTimes {
   availableTimes: string[];
@@ -20,11 +20,11 @@ export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
   }
 
   if (props.presentAvailableTimes && props.availableTimes.length > 0) {
-    return (<><ul>{availableTimesElements}</ul></>);
+    return (<><Box display="flex" justifyContent="center"><ul>{availableTimesElements}</ul></Box></>);
   }
 
   if (props.presentAvailableTimes && props.availableTimes.length === 0) {
-    return (<><p>Det finns inget bord kvar. Vänligen sök igen.</p></>)
+    return (<><Box display="flex" justifyContent="center"><p>Det finns inget bord kvar. Vänligen sök igen.</p></Box></>)
   }
 
   return (<></>);

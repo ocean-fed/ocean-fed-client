@@ -4,6 +4,7 @@ import AddReservation from "./add-reservation/AddReservation";
 import ReservationComponent from "../reservation/ReservationComponent";
 import Reservations from "./reservations/Reservations";
 import Reservation from "../../models/Reservation";
+import Box from '@material-ui/core/Box';
 
 export default function Admin() {
   const defaultReservations: Reservation[] = [];
@@ -39,8 +40,12 @@ export default function Admin() {
 
   return (
     <main>
-      <AddReservation showReservation={toggleReservation}></AddReservation>
-      <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations} toggleRefreshReservations={toggleRefreshReservations}></Reservations>
+      <Box display="flex" justifyContent="center" border="none" className="reservation">
+        <AddReservation showReservation={toggleReservation}></AddReservation>
+      </Box>
+      <Box display="flex" justifyContent="center" border="none" className="reservation">
+        <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations} toggleRefreshReservations={toggleRefreshReservations}></Reservations>
+      </Box>
     </main>
   );
 }

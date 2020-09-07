@@ -1,5 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Box } from "@material-ui/core";
 import "./Search.scss";
 
 export interface ISearchProps {
@@ -35,39 +35,41 @@ export default function Search(props: ISearchProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Sök efter tillgängliga tider</h3>
-      <TextField
-        name="numOfSeats"
-        id="numOfSeats"
-        label="Antal Gäster:"
-        type="number"
-        inputProps={ { max: 90 } }
-        value={numOfSeats}
-        onChange={updateNumOfSeats}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        required
-        autoFocus
-      />
-      <br />
-      <TextField
-        name="date"
-        id="date"
-        label="Datum:"
-        type="date"
-        value={date}
-        onChange={updateDate}
-        InputLabelProps={{
-          shrink: true,
-        }}
-        required
-      />
-      <br />
-      <Button type="submit" variant="outlined">
-        Sök
-      </Button>
-    </form>
+    <Box display="flex" justifyContent="center">
+      <form onSubmit={handleSubmit}>
+        <h3>Sök efter tillgängliga tider</h3>
+        <TextField
+          name="numOfSeats"
+          id="numOfSeats"
+          label="Antal Gäster:"
+          type="number"
+          inputProps={ { max: 90 } }
+          value={numOfSeats}
+          onChange={updateNumOfSeats}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          required
+          autoFocus
+        />
+        <br />
+        <TextField
+          name="date"
+          id="date"
+          label="Datum:"
+          type="date"
+          value={date}
+          onChange={updateDate}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          required
+        />
+        <br />
+        <Button type="submit" variant="outlined">
+          Sök
+        </Button>
+      </form>
+    </Box>
   );
 }

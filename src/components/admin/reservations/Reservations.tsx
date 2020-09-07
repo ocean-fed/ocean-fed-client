@@ -27,7 +27,7 @@ export default function Reservations(props: IReservations) {
 
   const reservationsAsRows = props.reservations.map((reservation: Reservation) => {
     return (
-      <tr key={reservation.refId}>
+        <tr key={reservation.refId}>
         <td>{reservation.refId}</td>
         <td>{reservation.date}</td>
         <td>{reservation.time}</td>
