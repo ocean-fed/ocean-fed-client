@@ -10,7 +10,6 @@ export interface IGetAvailableTimes {
   numOfSeats: number;
   updateAvailableTimes(times: string[]): void;
   togglePresentAvailableTimes(): void;
-  toggleMaxCapacityReached(): void;
 }
 
 export default function GetAvailableTimes(props: IGetAvailableTimes) {
@@ -54,7 +53,6 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
         return;
       } else {
         console.log("no reservation but more than max capacity reached (90 guests)! should present the right message to the user.");
-        props.toggleMaxCapacityReached();
         props.togglePresentAvailableTimes();
         return;
       }

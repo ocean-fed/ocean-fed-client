@@ -42,6 +42,7 @@ export default function Search(props: ISearchProps) {
         id="numOfSeats"
         label="Antal Gäster:"
         type="number"
+        inputProps={ { max: 90 } }
         value={numOfSeats}
         onChange={updateNumOfSeats}
         InputLabelProps={{

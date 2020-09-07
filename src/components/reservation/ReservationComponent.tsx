@@ -22,8 +22,6 @@ export default function ReservationComponent(props: IReservationComponent) {
   const defaultAvailableTimes: string[] = [];
   const [availableTimes, setAvailableTimes] = useState(defaultAvailableTimes);
 
-  const [maxCapacityReached, setMaxCapacityReached] = useState(false);
-
   const defaultChosenTime = "";
   const [chosenTime, setChosenTime] = useState(defaultChosenTime);
 
@@ -47,11 +45,6 @@ export default function ReservationComponent(props: IReservationComponent) {
 
   function togglePresentAvailableTimes() {
     setPresentAvailableTimes(true);
-  }
-
-  function toggleMaxCapacityReached() {
-    setAvailableTimes(defaultAvailableTimes);
-    setMaxCapacityReached(!maxCapacityReached);
   }
 
   function updateAvailableTimes(times: string[]) {
@@ -99,8 +92,8 @@ export default function ReservationComponent(props: IReservationComponent) {
   return (
     <main>
       <Search numOfSeats={numOfSeats} date={date} updateNumOfSeatsAndDate={updateNumOfSeatsAndDate} toggleGetAvailableTimesByDate={toggleGetAvailableTimesByDate} searchWithSavedValues={searchWithSavedValues}></Search>
-      <GetAvailableTimes numOfSeats={numOfSeats} date={date} setGetAvailableTimesByDate={() => setGetAvailableTimesByDate(!getAvailableTimesByDate)} getAvailableTimesByDate={getAvailableTimesByDate} togglePresentAvailableTimes={togglePresentAvailableTimes} updateAvailableTimes={updateAvailableTimes} toggleMaxCapacityReached={toggleMaxCapacityReached}></GetAvailableTimes>
-      <PresentAvailableTimes availableTimes={availableTimes} updateChosenTime={updateChosenTime} presentAvailableTimes={presentAvailableTimes} maxCapacityReached={maxCapacityReached} toggleMaxCapacityReached={toggleMaxCapacityReached}></PresentAvailableTimes>
+      <GetAvailableTimes numOfSeats={numOfSeats} date={date} setGetAvailableTimesByDate={() => setGetAvailableTimesByDate(!getAvailableTimesByDate)} getAvailableTimesByDate={getAvailableTimesByDate} togglePresentAvailableTimes={togglePresentAvailableTimes} updateAvailableTimes={updateAvailableTimes}></GetAvailableTimes>
+      <PresentAvailableTimes availableTimes={availableTimes} updateChosenTime={updateChosenTime} presentAvailableTimes={presentAvailableTimes}></PresentAvailableTimes>
     </main>
   );
 
