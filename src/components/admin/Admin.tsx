@@ -32,7 +32,7 @@ export default function Admin() {
         <div className="reservation">
           <ReservationComponent toggleRefreshReservations={toggleRefreshReservations}></ReservationComponent>
         </div>
-        <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations}></Reservations>
+        <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations} toggleRefreshReservations={toggleRefreshReservations}></Reservations>
       </main>
     );
   }
@@ -40,7 +40,7 @@ export default function Admin() {
   return (
     <main>
       <AddReservation showReservation={toggleReservation}></AddReservation>
-      <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations}></Reservations>
+      <Reservations reservations={reservations} updateReservations={updateReservations} refreshReservations={refreshReservations} toggleRefreshReservations={toggleRefreshReservations}></Reservations>
     </main>
   );
 }

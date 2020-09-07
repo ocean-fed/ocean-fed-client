@@ -72,7 +72,6 @@ export default function ReservationComponent(props: IReservationComponent) {
 
   function confirmReservation() {
     setReservationConfirmed(true);
-    props.toggleRefreshReservations();
   }
 
   function presentSearchWithSavedValues() {
@@ -92,7 +91,7 @@ export default function ReservationComponent(props: IReservationComponent) {
       <main>
         <PresentOngoingReservation numOfSeats={numOfSeats} date={date} chosenTime={chosenTime}></PresentOngoingReservation>
         <ReservationInputs sendGuestData={updateGuestData} toggleReserve={makeAReservation} toggleCancelled={presentSearchWithSavedValues}></ReservationInputs>
-        <PostGuestAndReservationData reserve={reserve} toggleReserve={() => setReserve(!reserve)} guestData={guestData} chosenTime={chosenTime} date={date} numOfSeats={numOfSeats} confirmReservation={confirmReservation}></PostGuestAndReservationData>
+        <PostGuestAndReservationData reserve={reserve} toggleReserve={() => setReserve(!reserve)} guestData={guestData} chosenTime={chosenTime} date={date} numOfSeats={numOfSeats} confirmReservation={confirmReservation} toggleRefreshReservations={props.toggleRefreshReservations}></PostGuestAndReservationData>
       </main>
     );
   }

@@ -12,11 +12,10 @@ export interface IReservations {
   reservations: Reservation[];
   updateReservations(reservationData: Reservation[]): void;
   refreshReservations: boolean;
+  toggleRefreshReservations(): void;
 }
 
 export default function Reservations(props: IReservations) {
-
-/*   const [reservations, setReservations] = useState(props.reservations); */
 
   const defaultGuests: Guest[] = [];
   const [guests, setGuests] = useState(defaultGuests);
@@ -50,13 +49,15 @@ export default function Reservations(props: IReservations) {
   function updateReservations(reservationsData: Reservation[]) {
     props.updateReservations(reservationsData);
   }
+  
+  function updateGuests(guestsData: Guest[]) {
+    setGuests(guestsData);
+  }
+
   function toggleReservationsIsFetched() {
     setReservationsIsFetched(!reservationsIsFetched);
   }
 
-  function updateGuests(guestsData: Guest[]) {
-    setGuests(guestsData);
-  }
   function toggleGuestsIsFetched() {
     setGuestsIsFetched(!guestsIsFetched);
   }
@@ -71,14 +72,17 @@ export default function Reservations(props: IReservations) {
     });
 
     props.updateReservations(reservationsWithGuestInfos);
-/*     setReservations(reservationsWithGuestInfos); */
+
+    toggleGuestsIsFetched();
+    toggleReservationsIsFetched();
+
   }
 
   function deleteReservation(reservation: Reservation) {
     console.log("wanted to delete this? : ", reservation);
     setRefIdOfReservationToDelete(reservation.refId);
   }
-
+  
   useEffect(() => {
     if (reservationsIsFetched && guestsIsFetched) {
       insertGuestInfosIntoReservations();
@@ -87,11 +91,12 @@ export default function Reservations(props: IReservations) {
   }, [reservationsIsFetched, guestsIsFetched]);
 
   useEffect(() => {
-    if (reservationsIsFetched && guestsIsFetched) {
+    if (props.refreshReservations && reservationsIsFetched && guestsIsFetched) {
       insertGuestInfosIntoReservations();
+      props.toggleRefreshReservations();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.refreshReservations]);
+  }, [props.refreshReservations, reservationsIsFetched, guestsIsFetched]);
 
   return (
     <>
@@ -121,7 +126,7 @@ export default function Reservations(props: IReservations) {
         updateGuests={updateGuests}
         refreshReservations={props.refreshReservations}
       ></GetGuests>
-      <DeleteReservation refIdOfReservationToDelete={refIdOfReservationToDelete}></DeleteReservation>
+      <DeleteReservation refIdOfReservationToDelete={refIdOfReservationToDelete} toggleRefreshReservations={props.toggleRefreshReservations}></DeleteReservation>
     </>
   );
 }

@@ -3,6 +3,7 @@ import axios from "axios";
 
 export interface IDeleteReservation {
   refIdOfReservationToDelete: number;
+  toggleRefreshReservations(): void;
 }
 
 export default function DeleteReservation(props: IDeleteReservation) {
@@ -18,6 +19,7 @@ export default function DeleteReservation(props: IDeleteReservation) {
       .then((response) => {
         console.log(response.data);
         console.log("deleted");
+        props.toggleRefreshReservations();
       })
       .catch(function (error) {
         console.log(error);
