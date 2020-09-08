@@ -50,25 +50,31 @@ export default function Search(props: ISearchProps) {
             shrink: true,
           }}
           required
+          fullWidth
           autoFocus
         />
         <br />
-        <TextField
-          name="date"
-          id="date"
-          label="Datum:"
-          type="date"
-          value={date}
-          onChange={updateDate}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          required
-        />
+        <Box mt={2}>
+          <TextField
+            name="date"
+            id="date"
+            label="Datum:"
+            type="date"
+            value={date}
+            onChange={updateDate}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            required
+            fullWidth
+          />
+        </Box>
         <br />
-        <Button type="submit" variant="outlined">
-          Sök
-        </Button>
+        <Box display="flex" justifyContent="center">
+          <Button type="submit" variant="outlined" fullWidth>
+            Sök
+          </Button>
+        </Box>
       </form>
     </Box>
   );

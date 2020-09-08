@@ -1,7 +1,7 @@
 import React from "react";
 import "./Gdpr.scss";
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Button } from '@material-ui/core';
+import { Box, Modal, Button } from '@material-ui/core';
 
 function getModalStyle() {
   const top = 50;
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     position: 'absolute',
-    width: 450,
+    width: 'auto',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -42,9 +42,9 @@ export default function Gdpr() {
   };
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleOpen}>
-        Gdpr
+    <Box mt={2}>
+      <Button variant="outlined" fullWidth onClick={handleOpen}>
+        Information om Gdpr
       </Button>
 
       <Modal
@@ -64,9 +64,11 @@ export default function Gdpr() {
           <h5>Vem har tillgång till dina personuppgifter?</h5>
           <p>Endast den bokningsansvarige på vår hemsida kan ta del av din information.</p>
           <p>2/9 2020</p>
-          <Button variant="outlined" onClick={handleClose}>Ok</Button>
+          <Box display="flex" justifyContent="center">
+            <Button variant="outlined" onClick={handleClose}>Ok</Button>
+          </Box>
         </div>
       </Modal>
-    </div>
+    </Box>
   );
 }
