@@ -53,7 +53,6 @@ export default function Search(props: ISearchProps) {
           fullWidth
           autoFocus
         />
-        <br />
         <Box mt={2}>
           <TextField
             name="date"
@@ -69,9 +68,8 @@ export default function Search(props: ISearchProps) {
             fullWidth
           />
         </Box>
-        <br />
-        <Box display="flex" justifyContent="center">
-          <Button type="submit" variant="outlined" fullWidth>
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Button type="submit" variant="outlined" color="primary" fullWidth>
             Sök
           </Button>
         </Box>
