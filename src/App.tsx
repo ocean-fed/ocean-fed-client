@@ -31,7 +31,7 @@ function App() {
                 <NavLink to="/contact">Kontakt</NavLink>
               </li>
               <li>
-                <NavLink to="/admin" color="primary">Admin</NavLink>
+                <NavLink to="/admin" color="primary">[Admin]</NavLink>
               </li>
             </ul>
           </nav>

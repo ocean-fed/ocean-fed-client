@@ -1,4 +1,4 @@
-import React, { useReducer, ChangeEvent, useEffect } from "react";
+import React, { useReducer, ChangeEvent, useEffect, useState, FormEvent } from "react";
 import Reservation from "../../../../models/Reservation";
 import { TextField, Box } from "@material-ui/core";
 import PresentAvailableSeatsByTime from "./present-available-seats-by-time/PresentAvailableSeatsByTime";
@@ -38,11 +38,10 @@ export default function EditReservationForm(props: IEditReservationForm) {
   );
 
   function updateReservationToEdit(e: ChangeEvent<HTMLInputElement>) {
-    console.log(e.target);
     const { name, value } = e.target;
     setReservationToEditFormInput({ [name]: value } as any);
     if (e.target.type === "date") {
-      presentAvailableSeatsByTime(e);
+      toggleRefreshAvailableSeatsByTime(e);
     }
   }
 
@@ -51,12 +50,19 @@ export default function EditReservationForm(props: IEditReservationForm) {
     setReservationToEditFormInput({ seats: seatsValue } as any);
   }
 
-  function presentAvailableSeatsByTime(dateEvent: ChangeEvent<HTMLInputElement>) {
+  const [refreshAvailableSeatsByTime, setRefreshAvailableSeatsByTime] = useState(false);
+
+  function toggleRefreshAvailableSeatsByTime(dateEvent: ChangeEvent<HTMLInputElement>) {
     console.log(dateEvent.target.value);
+    setRefreshAvailableSeatsByTime(!refreshAvailableSeatsByTime);
   }
 
-  function sendReservationToPut(reservationToPut: AdminReservationFormValue) {
-    console.log(reservationToPut);
+  function sendReservationToUpdate(e: FormEvent) {
+    e.preventDefault();
+    console.log(reservationToEditFormInput);
+    // send the inputs object higher to be transformed and sent to the API
+    // (replace UpdateReservation)
+    // send also a confirmUpdateReservation = true to start the process
   }
 
   useEffect(() => {
@@ -77,8 +83,7 @@ export default function EditReservationForm(props: IEditReservationForm) {
       <>
         <code>{JSON.stringify(props.reservationToEdit)}</code>
         <br />
-        {/*         <form onSubmit={sendReservationToPut}> */}
-        <form>
+        <form onSubmit={sendReservationToUpdate}>
           <Box my={1}>
             <TextField
               id="refId"
@@ -91,16 +96,24 @@ export default function EditReservationForm(props: IEditReservationForm) {
             />
           </Box>
           <Box my={1}>
-          <TextField
-            type="date"
-            id="date"
-            label="Datum:"
-            value={reservationToEditFormInput.date}
-            onChange={updateReservationToEdit}
-            name="date"
-            autoFocus
-          />
-          <PresentAvailableSeatsByTime reservations={props.reservations} initialDate={props.reservationToEdit.date} date={reservationToEditFormInput.date} sendSeatsChange={updateTimeAndNumOfSeats}></PresentAvailableSeatsByTime>
+            <TextField
+              type="date"
+              id="date"
+              label="Datum:"
+              value={reservationToEditFormInput.date}
+              onChange={updateReservationToEdit}
+              name="date"
+              autoFocus
+            />
+            &nbsp;
+            <PresentAvailableSeatsByTime
+              reservations={props.reservations}
+              initialReservation={props.reservationToEdit}
+              date={reservationToEditFormInput.date}
+              currentRefId={reservationToEditFormInput.refId}
+              sendSeatsChange={updateTimeAndNumOfSeats}
+              refreshAvailableSeatsByTime={refreshAvailableSeatsByTime}
+            ></PresentAvailableSeatsByTime>
           </Box>
 
           <Box my={1}>
@@ -131,8 +144,10 @@ export default function EditReservationForm(props: IEditReservationForm) {
           <button type="submit">Confirm ändra bokning</button>
         </form>
 
-        <h5>Current value of reservationToEditFormInput:</h5>
-        <code>{JSON.stringify(reservationToEditFormInput)}</code>
+        <code>
+          <h3>Current value of reservationToEditFormInput:</h3>
+          {JSON.stringify(reservationToEditFormInput)}
+        </code>
       </>
     );
   }

@@ -52,7 +52,6 @@ export default function ReservationInputs(props: IReservationInputsProps) {
             <Button type="button" variant="outlined" color="secondary" onClick={() => handleCancel()}>AVBRYT</Button>
             <Button type="submit" variant="outlined" color="primary">BOKA</Button>
           </Box>
-          <code>{JSON.stringify(guestFormValue)}</code>
         </form>
       </Box>
     </div>
