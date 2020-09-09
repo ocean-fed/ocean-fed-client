@@ -11,7 +11,7 @@ export interface IPresentAvailableTimes {
 export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
 
   const availableTimesElements = props.availableTimes.map(availableTime => {
-    return <Box key={availableTime} display="flex" justifyContent="center" mb={2}><Button type="button" variant="outlined" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</Button></Box>;
+    return <Box key={availableTime} display="flex" justifyContent="center" mb={2}><Button type="button" variant="outlined" size="large" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</Button></Box>;
   });
 
   function sendChosenTime(chosenTime: string) {

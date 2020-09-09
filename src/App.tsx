@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <header>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" pt={2} pb={2}>
           <nav>
             <ul>
               <li>
@@ -25,7 +25,7 @@ function App() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/reservation">Boka</NavLink>
+                <NavLink to="/reservation" color="primary">Boka</NavLink>
               </li>
               <li>
                 <NavLink to="/contact">Kontakt</NavLink>

@@ -20,10 +20,13 @@ export default function PresentOngoingReservation(props: IPresentOngoingReservat
 
   
   return (
-    <Box display="flex" justifyContent="center">
-      <p>
-        — Du kommer att boka bord för {props.numOfSeats} {guestOrGuests} kl. {props.chosenTime} på följände datum: {props.date}.
-      </p>
-    </Box>
+    <>
+      <Box component="p"  textAlign="center" >
+        Du kommer att boka bord för:
+      </Box>
+      <Box component="h3"  textAlign="center">
+        {props.numOfSeats} {guestOrGuests}, {props.chosenTime}, {props.date}
+      </Box>
+    </>
   );
 }

@@ -1,6 +1,9 @@
 // styling below for simpler and less space-taking navigation during development
 
 header {
+  box-shadow: 0 0 4px #4791db;
+  border-radius: 5px;
+  margin-bottom: 12px;
   nav {
     ul {
       list-style-type: none;
@@ -8,12 +11,23 @@ header {
       li {
         display: inline;
         padding: 1rem;
+        a {
+          color: rgb(238, 238, 238);
+          text-decoration: none;
+        }
+        .active {
+          color: #4791db;
+        }
       }
     }
   }
 }
 
-.active {
-  color: red;
-  text-decoration: none;
+main {
+  background: rgb(238, 238, 238);
+  padding: 16px 0 16px 0;
+  border: 8px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 4px #4791db;
 }
+
