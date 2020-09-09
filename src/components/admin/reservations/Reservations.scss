@@ -1,19 +1,19 @@
 table,
 td {
-    border: 1px solid #333;
+    border: .025em solid grey;
     text-align: center;
 }
 table {
     margin-top: 1em;
 }
 td {
-padding: .5em;
+    padding: .25em;
 }
 tr > strong {
     text-align: center;
 }
 thead,
 tfoot {
-    background-color: darkslategrey;
+    background-color: darkgreen;
     color: #fff;
 }

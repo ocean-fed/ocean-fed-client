@@ -81,7 +81,7 @@ export default function EditReservationForm(props: IEditReservationForm) {
   if (props.showEditReservationForm) {
     return (
       <>
-        <code>{JSON.stringify(props.reservationToEdit)}</code>
+{/*         <code>{JSON.stringify(props.reservationToEdit)}</code> */}
         <br />
         <form onSubmit={sendReservationToUpdate}>
           <Box my={1}>
@@ -143,10 +143,9 @@ export default function EditReservationForm(props: IEditReservationForm) {
           </Box>
           <button type="submit">Confirm ändra bokning</button>
         </form>
-
+        <br/>
         <code>
-          <h3>Current value of reservationToEditFormInput:</h3>
-          {JSON.stringify(reservationToEditFormInput)}
+          Current value of reservationToEditFormInput: {JSON.stringify(reservationToEditFormInput)}
         </code>
       </>
     );
