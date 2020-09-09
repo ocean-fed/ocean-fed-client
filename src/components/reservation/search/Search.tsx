@@ -78,7 +78,7 @@ export default function Search(props: ISearchProps) {
         </Box>
         <Box display="flex" justifyContent="center" mt={2}>
           <ThemeProvider theme={theme}>
-            <Button type="submit" variant="contained" disableElevation color="primary" fullWidth>
+            <Button type="submit" id="getTimesButton" variant="contained" disableElevation color="primary" fullWidth>
               Sök
             </Button>
           </ThemeProvider>

@@ -1,18 +1,18 @@
 import React from 'react';
 import { render, fireEvent, getByLabelText, queryByAttribute } from '@testing-library/react';
-import Reservation from './Reservation';
+import ReservationComponent from './ReservationComponent';
 
-test('renders search title text', () => {
-  const { getByText } = render(<Reservation />)
+test('renders search title text to see if document is found', () => {
+  const { getByText } = render(<ReservationComponent />)
   const searchTitle = getByText(/sök efter tillgängliga tider/i);
   expect(searchTitle).toBeInTheDocument();
 })
 
 test('it should enter 2 guests in the numOfSeats input-field', () => {
-  const { container } = render(<Reservation />)
+  const { container } = render(<ReservationComponent />)
   const getById = queryByAttribute.bind(null, 'id');
 
-  const dom = render(<Reservation />);
+  const dom = render(<ReservationComponent />);
   const numOfSeatsInput = getById(dom.container, 'numOfSeats'); 
   
   fireEvent.change(numOfSeatsInput, { target: {value: 2 }});
@@ -21,10 +21,10 @@ test('it should enter 2 guests in the numOfSeats input-field', () => {
 })
 
 test('it should set 2020-09-20 as date', () => {
-  const { container } = render(<Reservation />)
+  const { container } = render(<ReservationComponent />)
   const getById = queryByAttribute.bind(null, 'id');
 
-  const dom = render(<Reservation />);
+  const dom = render(<ReservationComponent />);
   const dateInput = getById(dom.container, 'date'); 
 
   fireEvent.change(dateInput, { target: { value: '2020-09-20'}});
@@ -32,25 +32,25 @@ test('it should set 2020-09-20 as date', () => {
 })
 
 test('it should submit date and amount of guests and choose the seating at 18.00', () => {
-  const { container } = render(<Reservation />);
+  const { container } = render(<ReservationComponent />);
   const getById = queryByAttribute.bind(null, 'id');
 
-  const dom = render(<Reservation />);
+  const dom = render(<ReservationComponent />);
 
   const getTimesButton = getById(dom.container, 'getTimesButton');
   fireEvent.click(getTimesButton);
 
-  const eighteen = getByText(/18/);
+  const eighteen = getByText(/18/i);
   fireEvent.click(eighteen);
 
   expect(eighteen).toBeCalled();
 })
 
 test('it should enter name, email and phone in the form and then submit', () => {
-  const { container } = render(<Reservation />)
+  const { container } = render(<ReservationComponent />)
   const getById = queryByAttribute.bind(null, 'id');
 
-  const dom = render(<Reservation />)
+  const dom = render(<ReservationComponent />)
 
   const nameInput = getById(dom.container, 'name')
   const emailInput = getById(dom.container, 'email')
@@ -67,8 +67,8 @@ test('it should enter name, email and phone in the form and then submit', () => 
 })
 
 test('it should try to make and reservation on a fully booked seating and fail', () => {
-  const { container } = render(<Reservation />)
-  const dom = render(<Reservation />)
+  const { container } = render(<ReservationComponent />)
+  const dom = render(<ReservationComponent />)
   const getById = queryByAttribute.bind(null, 'id');
 
 
