@@ -7,6 +7,11 @@ import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
 
 function App() {
+
+/*   function toggleRefreshReservations() {
+    console.log("Who's there?");
+  } */
+
   return (
     <Router>
       <header>
@@ -31,7 +36,7 @@ function App() {
       </header>
       <Switch>
           <Route path="/reservation">
-            <ReservationComponent toggleRefreshReservations={() => { console.log("toggleRefreshReservations in reservation path.")}} />
+            <ReservationComponent toggleRefreshReservations={() => { console.log(null) }} />
           </Route>
           <Route path="/contact">
             <Contact />
