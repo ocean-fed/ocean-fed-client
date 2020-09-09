@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <main>
       <Box display="flex" justifyContent="center">
-        <p>Välkommen till L'Océan!</p>
+        <p className="welcome-message">Välkommen till L'Océan!</p>
       </Box>
     </main>
   )
