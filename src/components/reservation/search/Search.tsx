@@ -65,7 +65,7 @@ export default function Search(props: ISearchProps) {
         />
       </label>
       <br/>
-      <button type="submit">Sök</button>
+      <button id="getTimesButton" type="submit">Sök</button>
     </form>
   );
 }
