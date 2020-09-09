@@ -2,5 +2,9 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: black;
+  background: linear-gradient(135deg, white, rgb(237, 245, 255));
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
