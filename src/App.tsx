@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import "./App.scss";
 import Home from "./components/home/Home";
 import ReservationComponent from "./components/reservation/ReservationComponent";
 import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
-import { Link, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 function App() {
 
@@ -20,18 +20,18 @@ function App() {
           <nav>
             <ul>
               <li>
-                <Link href="/">
+                <NavLink exact to="/">
                   Startsida
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link href="/reservation">Boka</Link>
+                <NavLink to="/reservation">Boka</NavLink>
               </li>
               <li>
-                <Link href="/contact">Kontakt</Link>
+                <NavLink to="/contact">Kontakt</NavLink>
               </li>
               <li>
-                <Link href="/admin" color="primary">Admin</Link>
+                <NavLink to="/admin" color="primary">Admin</NavLink>
               </li>
             </ul>
           </nav>
