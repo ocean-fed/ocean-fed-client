@@ -1,6 +1,6 @@
 import React from "react";
 import "./PresentAvailableTimes.scss";
-import Button from '@material-ui/core/Button';
+import { Box, Button } from "@material-ui/core";
 
 export interface IPresentAvailableTimes {
   availableTimes: string[];
@@ -11,7 +11,7 @@ export interface IPresentAvailableTimes {
 export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
 
   const availableTimesElements = props.availableTimes.map(availableTime => {
-    return <li key={availableTime}><Button type="button" variant="outlined" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</Button></li>;
+    return <Box key={availableTime} display="flex" justifyContent="center" mb={2}><Button type="button" variant="outlined" onClick={() => { sendChosenTime(availableTime) }}>{availableTime}</Button></Box>;
   });
 
   function sendChosenTime(chosenTime: string) {
@@ -20,11 +20,11 @@ export default function PresentAvailableTimes(props: IPresentAvailableTimes) {
   }
 
   if (props.presentAvailableTimes && props.availableTimes.length > 0) {
-    return (<><ul>{availableTimesElements}</ul></>);
+    return (<><Box display="flex" justifyContent="center"><h3>Lediga tider:</h3></Box>{availableTimesElements}</>);
   }
 
   if (props.presentAvailableTimes && props.availableTimes.length === 0) {
-    return (<><p>Det finns inget bord kvar. Vänligen sök igen.</p></>)
+    return (<><Box display="flex" justifyContent="center"><p>Det finns inget bord kvar. Vänligen sök igen.</p></Box></>)
   }
 
   return (<></>);

@@ -6,6 +6,7 @@ import GetAvailableTimes from "./get-available-times/GetAvailableTimes";
 import Search from "./search/Search";
 import PresentAvailableTimes from "./present-available-times/PresentAvailableTimes";
 import PresentOngoingReservation from "./present-ongoing-reservation/PresentOngoingReservation";
+import Box from '@material-ui/core/Box';
 
 export interface IReservationComponent {
   toggleRefreshReservations(): void;
@@ -74,9 +75,13 @@ export default function ReservationComponent(props: IReservationComponent) {
   }
 
   if (reservationConfirmed) {
-    return (<main>
-      <h3>Du har bokat ett bord!</h3>
-    </main>);
+    return (
+      <main>
+        <Box display="flex" justifyContent="center">
+          <h3>Du har bokat ett bord!</h3>
+        </Box>
+      </main>
+    );
   }
 
   if (chosenTime.length > 0) {
