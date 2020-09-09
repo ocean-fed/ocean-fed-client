@@ -9,10 +9,10 @@ export interface IGetAvailableTimes {
   date: string;
   numOfSeats: number;
   updateAvailableTimes(times: string[]): void;
+  togglePresentAvailableTimes(): void;
 }
 
 export default function GetAvailableTimes(props: IGetAvailableTimes) {
-
 
   function getReservationsByDate() {
     console.log("getReservationsByDate starts");
@@ -49,18 +49,15 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
         console.log("no reservations yet and not more than 90 guests, sending back all times as available.");
         let availableTimes = ["18.00", "21.00"];
         props.updateAvailableTimes(availableTimes);
+        props.togglePresentAvailableTimes();
         return;
       } else {
-        console.log("no reservation but more than max capacity reached (90 guests)! should be sending the right message to the user.");
-        // later on the value sent below should be an empty array, and perhaps another props function should send why there is no times available so that PresentAvailableTimes present the right validation message.
-        props.updateAvailableTimes(["max capacity 90 reached! (dev msg)"]);
+        console.log("no reservation but more than max capacity reached (90 guests)! should present the right message to the user.");
+        props.togglePresentAvailableTimes();
         return;
-
       }
     } else {
-
       deduceAvailableTimes(reservationData);
-      
     }
 
   }
@@ -104,7 +101,7 @@ export default function GetAvailableTimes(props: IGetAvailableTimes) {
     
     // update the props
     props.updateAvailableTimes(availableTimes);
-    console.log(availableTimes);
+    props.togglePresentAvailableTimes();
 
   }
 
