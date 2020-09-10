@@ -7,21 +7,16 @@ import { Box } from "@material-ui/core";
 
 export default function Admin() {
   const defaultReservations: Reservation[] = [];
-
   const [reservations, setReservations] = useState(defaultReservations);
-
   const [refreshReservations, setRefreshReservations] = useState(false);
-
   const [showReservation, setShowReservation] = useState(false);
 
   function updateReservations(reservationData: Reservation[]) {
     setReservations(reservationData);
   }
-
   function toggleReservation() {
     setShowReservation(!showReservation);
   }
-
   function toggleRefreshReservations() {
     setRefreshReservations(!refreshReservations);
   }
@@ -43,17 +38,16 @@ export default function Admin() {
       </main>
     );
   }
-
   return (
     <main>
       <Box p={3}>
-      <AddReservation showReservation={toggleReservation}></AddReservation>
-      <Reservations
-        reservations={reservations}
-        updateReservations={updateReservations}
-        refreshReservations={refreshReservations}
-        toggleRefreshReservations={toggleRefreshReservations}
-      ></Reservations>
+        <AddReservation showReservation={toggleReservation}></AddReservation>
+        <Reservations
+          reservations={reservations}
+          updateReservations={updateReservations}
+          refreshReservations={refreshReservations}
+          toggleRefreshReservations={toggleRefreshReservations}
+        ></Reservations>
       </Box>
     </main>
   );

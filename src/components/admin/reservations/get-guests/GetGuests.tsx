@@ -9,44 +9,41 @@ export interface IGetGuests {
 }
 
 export default function GetGuests(props: IGetGuests) {
-
   function getGuests() {
     const guestsUrl = "http://localhost:4000/guests";
-    axios.get(guestsUrl).then((response) => {
-      console.log("response.data", response.data);
+    axios
+      .get(guestsUrl)
+      .then((response) => {
+        /*       console.log("response.data", response.data) */ const guests: Guest[] = response.data.map(
+          (guestsData: any) => {
+            const guest: Guest = new Guest();
+            guest._id = guestsData._id;
+            guest.name = guestsData.name;
+            guest.email = guestsData.email;
+            guest.phone = guestsData.phone;
+            return guest;
+          }
+        );
 
-      const guests: Guest[] = response.data.map((guestsData: any) => {
-        const guest: Guest = new Guest();
-        guest._id = guestsData._id;
-        guest.name = guestsData.name;
-        guest.email = guestsData.email;
-        guest.phone = guestsData.phone;
-        return guest;
+        props.updateGuests(guests);
+        props.toggleGuestsIsFetched();
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-
-      props.updateGuests(guests);
-      props.toggleGuestsIsFetched();
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
   }
 
   useEffect(() => {
     getGuests();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (props.refreshReservations) {
       getGuests();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.refreshReservations]);
 
-  return (<></>);
-
-
-
-
+  return <></>;
 }

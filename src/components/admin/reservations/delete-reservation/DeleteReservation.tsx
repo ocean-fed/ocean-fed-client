@@ -7,9 +7,8 @@ export interface IDeleteReservation {
 }
 
 export default function DeleteReservation(props: IDeleteReservation) {
-
   function deleteReservation() {
-    console.log(props.refIdOfReservationToDelete);
+/*     console.log(props.refIdOfReservationToDelete); */
     const deleteReservationUrl = "http://localhost:4000/delete-reservation";
     axios({
       method: "post",
@@ -18,21 +17,20 @@ export default function DeleteReservation(props: IDeleteReservation) {
     })
       .then((response) => {
         console.log(response.data);
-        console.log("deleted");
+/*         console.log("deleted"); */
         props.toggleRefreshReservations();
       })
       .catch(function (error) {
         console.log(error);
       });
-
   }
 
   useEffect(() => {
     if (props.refIdOfReservationToDelete !== 0) {
-    deleteReservation();
+      deleteReservation();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.refIdOfReservationToDelete]);
 
-  return (<></>);
+  return <></>;
 }

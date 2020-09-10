@@ -24,8 +24,6 @@ export interface AdminReservationFormValue {
 }
 
 export default function EditReservationForm(props: IEditReservationForm) {
-  // for the forms
-
   let defaultAdminReservationFormValue: AdminReservationFormValue = {
     refId: 0,
     date: "",
@@ -67,22 +65,19 @@ export default function EditReservationForm(props: IEditReservationForm) {
   const [refreshAvailableSeatsByTime, setRefreshAvailableSeatsByTime] = useState(false);
 
   function toggleRefreshAvailableSeatsByTime(dateEvent: ChangeEvent<HTMLInputElement>) {
-    console.log(dateEvent.target.value);
+    /*     console.log(dateEvent.target.value); */
     setRefreshAvailableSeatsByTime(!refreshAvailableSeatsByTime);
   }
-
-  // transform, set and confirm update reservation and guest and then toggle confirm (and toggle refresh higher up)
 
   const defaultReservationToUpdate: Reservation = new Reservation();
   const defaultGuestToUpdate: Guest = new Guest();
   const [reservationToUpdate, setReservationToUpdate] = useState(defaultReservationToUpdate);
   const [guestToUpdate, setGuestToUpdate] = useState(defaultGuestToUpdate);
-
   const [confirmUpdateReservation, setConfirmUpdateReservation] = useState(false);
 
   function sendReservationToUpdate(e: FormEvent) {
     e.preventDefault();
-    console.log(reservationToEditFormInput);
+    /*     console.log(reservationToEditFormInput); */
     const reservation = new Reservation();
     reservation.refId = reservationToEditFormInput.refId;
     reservation.date = reservationToEditFormInput.date;
@@ -118,13 +113,12 @@ export default function EditReservationForm(props: IEditReservationForm) {
   }, [props.reservationToEdit]);
 
   if (giveFeedback) {
-    return (<p className="confirmation">Bokning ändrat</p>)
+    return <p className="confirmation">Bokning ändrat</p>;
   }
 
   if (props.showEditReservationForm) {
     return (
       <>
-        {/*         <code>{JSON.stringify(props.reservationToEdit)}</code> */}
         <br />
         <form onSubmit={sendReservationToUpdate}>
           <Box my={1}>
@@ -158,7 +152,6 @@ export default function EditReservationForm(props: IEditReservationForm) {
               refreshAvailableSeatsByTime={refreshAvailableSeatsByTime}
             ></PresentAvailableSeatsByTime>
           </Box>
-
           <Box my={1}>
             <TextField
               id="name"
@@ -167,7 +160,6 @@ export default function EditReservationForm(props: IEditReservationForm) {
               onChange={updateReservationToEdit}
               name="name"
             />
-
             <TextField
               id="email"
               label="E-post:"
@@ -175,7 +167,6 @@ export default function EditReservationForm(props: IEditReservationForm) {
               onChange={updateReservationToEdit}
               name="email"
             />
-
             <TextField
               id="phone"
               label="Tel:"

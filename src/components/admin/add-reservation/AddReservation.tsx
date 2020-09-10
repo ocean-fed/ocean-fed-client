@@ -5,5 +5,9 @@ export interface IAddReservation {
 }
 
 export default function AddReservation(props: IAddReservation) {
-  return (<button type="button" onClick={() => props.showReservation() }>NY BOKNING</button>)
+  return (
+    <button type="button" onClick={() => props.showReservation()}>
+      NY BOKNING
+    </button>
+  );
 }

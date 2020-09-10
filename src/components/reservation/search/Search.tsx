@@ -1,14 +1,5 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { Button, TextField, Box } from "@material-ui/core";
-import "./Search.scss";
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-  },
-});
 
 export interface ISearchProps {
   updateNumOfSeatsAndDate(numOfSeats: number, date: string): void;
@@ -51,7 +42,7 @@ export default function Search(props: ISearchProps) {
           id="numOfSeats"
           label="Antal Gäster:"
           type="number"
-          inputProps={ { max: 90 } }
+          inputProps={{ max: 90 }}
           value={numOfSeats}
           onChange={updateNumOfSeats}
           InputLabelProps={{
@@ -77,11 +68,9 @@ export default function Search(props: ISearchProps) {
           />
         </Box>
         <Box display="flex" justifyContent="center" mt={2}>
-          <ThemeProvider theme={theme}>
-            <Button type="submit" id="getTimesButton" variant="contained" disableElevation color="primary" fullWidth>
-              Sök
-            </Button>
-          </ThemeProvider>
+          <Button type="submit" id="getTimesButton" variant="contained" disableElevation color="primary" fullWidth>
+            Sök
+          </Button>
         </Box>
       </form>
     </Box>

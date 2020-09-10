@@ -1,7 +1,6 @@
-import React from "react";
-import "./Gdpr.scss";
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Modal, Button } from '@material-ui/core';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Modal, Button } from "@material-ui/core";
 
 function getModalStyle() {
   const top = 50;
@@ -13,15 +12,15 @@ function getModalStyle() {
   };
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   paper: {
-    position: 'absolute',
-    width: 'auto',
+    position: "absolute",
+    width: "auto",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
@@ -30,8 +29,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function Gdpr() {
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,7 +45,6 @@ export default function Gdpr() {
       <Button variant="outlined" fullWidth onClick={handleOpen}>
         Information om Gdpr
       </Button>
-
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -57,21 +55,16 @@ export default function Gdpr() {
           <h2>INTEGRITETSINFORMATION FÖR BOKNING AV BORD PÅ L'OCEAN</h2>
           <h3>Varför använder vi dina personuppgifter?</h3>
           <p>
-            Vi använder dina personuppgifter för att förbättra kvaliten i din
-            kundupplevelse. Detta genom att bokningen lagras i ett
-            databas-system och därmed kan associeras till did som person.
+            Vi använder dina personuppgifter för att förbättra kvaliten i din kundupplevelse. Detta genom att bokningen
+            lagras i ett databas-system och därmed kan associeras till did som person.
           </p>
           <h3>Vad för slags personuppgifter samlar vi in?</h3>
           <p>
-            Vi samlar in så lite som möjligt av dina personuppgifter. Endast
-            namn, e-post och telefonnummer(valfritt) är nödvändigt för detta
-            ändamål.
+            Vi samlar in så lite som möjligt av dina personuppgifter. Endast namn, e-post och telefonnummer(valfritt) är
+            nödvändigt för detta ändamål.
           </p>
           <h3>Vem har tillgång till dina personuppgifter?</h3>
-          <p>
-            Endast den bokningsansvarige på vår hemsida kan ta del av din
-            information.
-          </p>
+          <p>Endast den bokningsansvarige på vår hemsida kan ta del av din information.</p>
           <p>2/9 2020</p>
           <Box display="flex" justifyContent="center">
             <Button variant="contained" disableElevation color="primary" fullWidth onClick={handleClose}>

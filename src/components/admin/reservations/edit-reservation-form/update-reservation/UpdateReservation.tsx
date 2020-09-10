@@ -23,8 +23,8 @@ export default function UpdateReservation(props: IUpdateReservation) {
       data: { reservationData: props.reservationToUpdate, guestData: props.guestToUpdate },
     })
       .then((response) => {
-        console.log(response.data);
-        console.log("updated");
+/*         console.log(response.data);
+        console.log("updated"); */
         props.toggleConfirmUpdateReservation();
         props.toggleRefreshReservations();
         props.giveFeedback();

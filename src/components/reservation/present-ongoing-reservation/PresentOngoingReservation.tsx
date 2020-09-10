@@ -18,7 +18,6 @@ export default function PresentOngoingReservation(props: IPresentOngoingReservat
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.numOfSeats]);
 
-  
   return (
     <>
       <Box component="p"  textAlign="center" >

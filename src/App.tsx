@@ -41,7 +41,7 @@ function App() {
         <Route path="/reservation">
           <ReservationComponent
             toggleRefreshReservations={() => {
-              console.log(null);
+              return null
             }}
           />
         </Route>

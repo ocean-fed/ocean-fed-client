@@ -77,14 +77,12 @@ export default function Reservations(props: IReservations) {
   }
 
   // DELETE
-
   function deleteReservation(reservation: Reservation) {
     console.log("wanted to delete this? : ", reservation);
     setRefIdOfReservationToDelete(reservation.refId);
   }
 
   // EDIT
-
   const [showEditReservationForm, setShowEditReservationForm] = useState(false);
   const defaultReservationToEdit: Reservation = new Reservation();
   const [reservationToEdit, setReservationToEdit] = useState(defaultReservationToEdit);
@@ -95,7 +93,6 @@ export default function Reservations(props: IReservations) {
   }
 
   // USE-EFFECTS
-  
   useEffect(() => {
     if (reservationsIsFetched && guestsIsFetched) {
       insertGuestInfosIntoReservations();
@@ -112,7 +109,6 @@ export default function Reservations(props: IReservations) {
   }, [props.refreshReservations, reservationsIsFetched, guestsIsFetched]);
 
   // MAIN RETURN
-
   return (
     <>
       <table>

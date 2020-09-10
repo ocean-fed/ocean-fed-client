@@ -52,7 +52,6 @@ export default function PresentAvailableSeatsByTime(props: IPresentAvailableSeat
   }
 
   function createArrayForOptions(maxNumOfAvailableTables: number) {
-    console.log(maxNumOfAvailableTables);
     let arrayOfAZero = [0];
     return arrayOfAZero.concat(Array.from(Array(maxNumOfAvailableTables * 6), (_, index) => index + 1));
   }
@@ -70,19 +69,14 @@ export default function PresentAvailableSeatsByTime(props: IPresentAvailableSeat
   }
 
   function deduceMaxSeatsByTimeOnThisDate(date: string, initialReservation?: Reservation) {
-    // get all the reservations on this date from props.reservations in an array
-    console.log(props.reservations);
-    
     const defaultSeating = new Seating();
-    
+
     const reservationsOnThisDate: Reservation[] = props.reservations.filter((reservation: Reservation) => {
       return reservation.date === date;
     });
-    
-    console.log(reservationsOnThisDate);
 
-    const allNumOfSeats1800 = getNumOfSeatsForOneSeating(reservationsOnThisDate.filter(r => r.time === "18.00"));
-    const allNumOfSeats2100 = getNumOfSeatsForOneSeating(reservationsOnThisDate.filter(r => r.time === "21.00"));
+    const allNumOfSeats1800 = getNumOfSeatsForOneSeating(reservationsOnThisDate.filter((r) => r.time === "18.00"));
+    const allNumOfSeats2100 = getNumOfSeatsForOneSeating(reservationsOnThisDate.filter((r) => r.time === "21.00"));
 
     const neededNumberOfTables1800 = calculateNeededNumberOfTables(allNumOfSeats1800);
     const neededNumberOfTables2100 = calculateNeededNumberOfTables(allNumOfSeats2100);
@@ -93,11 +87,15 @@ export default function PresentAvailableSeatsByTime(props: IPresentAvailableSeat
     if (initialReservation) {
       const neededNumberOfTablesForInitialReservation = calculateNeededNumberOfTables(initialReservation.seats);
       if (initialReservation.time === "18.00") {
-        allSeatsAvailable1800 = createArrayForOptions(defaultSeating.maxNumOfTables - neededNumberOfTables1800 + neededNumberOfTablesForInitialReservation);
+        allSeatsAvailable1800 = createArrayForOptions(
+          defaultSeating.maxNumOfTables - neededNumberOfTables1800 + neededNumberOfTablesForInitialReservation
+        );
         allSeatsAvailable2100 = createArrayForOptions(defaultSeating.maxNumOfTables - neededNumberOfTables2100);
       } else {
         allSeatsAvailable1800 = createArrayForOptions(defaultSeating.maxNumOfTables - neededNumberOfTables1800);
-        allSeatsAvailable2100 = createArrayForOptions(defaultSeating.maxNumOfTables - neededNumberOfTables2100 + neededNumberOfTablesForInitialReservation);
+        allSeatsAvailable2100 = createArrayForOptions(
+          defaultSeating.maxNumOfTables - neededNumberOfTables2100 + neededNumberOfTablesForInitialReservation
+        );
       }
     } else {
       allSeatsAvailable1800 = createArrayForOptions(defaultSeating.maxNumOfTables - neededNumberOfTables1800);
@@ -109,8 +107,8 @@ export default function PresentAvailableSeatsByTime(props: IPresentAvailableSeat
   }
 
   function reset() {
-    console.log(optionsSeating1800);
-    console.log(optionsSeating2100);
+/*     console.log(optionsSeating1800);
+    console.log(optionsSeating2100); */
   }
 
   useEffect(() => {
@@ -120,12 +118,12 @@ export default function PresentAvailableSeatsByTime(props: IPresentAvailableSeat
       deduceMaxSeatsByTimeOnThisDate(props.date, props.initialReservation);
     }
     return reset();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.currentRefId]);
 
   useEffect(() => {
     deduceMaxSeatsByTimeOnThisDate(props.date);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.refreshAvailableSeatsByTime]);
 
   return (

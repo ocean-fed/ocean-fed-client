@@ -12,7 +12,7 @@ export default function Cancel() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    let refIdToCancelAsANumber = Number(refIdToCancel);    
+    let refIdToCancelAsANumber = Number(refIdToCancel);
     console.log(refIdToCancelAsANumber);
 
     axios({
@@ -21,49 +21,54 @@ export default function Cancel() {
       data: { refIdToCancel: refIdToCancelAsANumber },
     })
       .then((response) => {
-        console.log("cancelled: ");
-        console.log(response.data);
+/*         console.log(response); */
         setConfirmCancel(true);
-        /* props.toggleRefreshReservations(); */
       })
       .catch(function (error) {
         console.log(error);
       });
-    
   }
 
   useEffect(() => {
     if (confirmCancel) {
       setConfirmCancel(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main>
       <Box display="flex" justifyContent="center">
-      <form onSubmit={handleSubmit}>
-        <TextField
-          name="cancel"
-          id="cancel"
-          label="Referens nummer:"
-          type="number"
-          value={refIdToCancel}
-          onChange={updateRefIdToCancel}
-          InputLabelProps={{
-            shrink: true,
-          }}
-          required
-          fullWidth
-          autoFocus
-        ></TextField>
-        <Box mt={2}>
-        <Button type="submit" id="CancelButton" variant="contained" disableElevation color="primary" fullWidth disabled={confirmCancel}>
-          Avboka
-        </Button>
-        </Box>
-      </form>
-      {confirmCancel ? "Avbokat!" : null}
+        <form onSubmit={handleSubmit}>
+          <TextField
+            name="cancel"
+            id="cancel"
+            label="Referens nummer:"
+            type="number"
+            value={refIdToCancel}
+            onChange={updateRefIdToCancel}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            required
+            fullWidth
+            autoFocus
+          ></TextField>
+          <Box mt={2}>
+            <Button
+              type="submit"
+              id="CancelButton"
+              variant="contained"
+              disableElevation
+              color="primary"
+              fullWidth
+              disabled={confirmCancel}
+            >
+              Avboka
+            </Button>
+          </Box>
+        </form>
+        {confirmCancel ? "Avbokat!" : null}
       </Box>
     </main>
   );
