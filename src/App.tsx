@@ -5,14 +5,10 @@ import Home from "./components/home/Home";
 import ReservationComponent from "./components/reservation/ReservationComponent";
 import Contact from "./components/contact/Contact";
 import Admin from "./components/admin/Admin";
-import { Box } from '@material-ui/core';
+import { Box } from "@material-ui/core";
+import Cancel from "./components/cancel/Cancel";
 
 function App() {
-
-/*   function toggleRefreshReservations() {
-    console.log("Who's there?");
-  } */
-
   return (
     <Router>
       <header>
@@ -25,31 +21,42 @@ function App() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/reservation" color="primary">Boka</NavLink>
+                <NavLink to="/reservation" color="primary">
+                  Boka
+                </NavLink>
               </li>
               <li>
                 <NavLink to="/contact">Kontakt</NavLink>
               </li>
               <li>
-                <NavLink to="/admin" color="primary">[Admin]</NavLink>
+                <NavLink to="/admin" color="primary">
+                  [Admin]
+                </NavLink>
               </li>
             </ul>
           </nav>
         </Box>
       </header>
       <Switch>
-          <Route path="/reservation">
-            <ReservationComponent toggleRefreshReservations={() => { console.log(null) }} />
-          </Route>
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          <Route path="/admin">
-            <Admin />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+        <Route path="/reservation">
+          <ReservationComponent
+            toggleRefreshReservations={() => {
+              console.log(null);
+            }}
+          />
+        </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/admin">
+          <Admin />
+        </Route>
+        <Route path="/cancel">
+          <Cancel />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
       </Switch>
     </Router>
   );
