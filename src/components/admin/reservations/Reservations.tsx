@@ -131,7 +131,7 @@ export default function Reservations(props: IReservations) {
         </thead>
         <tbody>{reservationsAsRows}</tbody>
       </table>
-      <EditReservationForm showEditReservationForm={showEditReservationForm} reservationToEdit={reservationToEdit} reservations={props.reservations}></EditReservationForm>
+      <EditReservationForm showEditReservationForm={showEditReservationForm} reservationToEdit={reservationToEdit} reservations={props.reservations} toggleRefreshReservations={props.toggleRefreshReservations}></EditReservationForm>
       <GetReservations
         toggleReservationsIsFetched={toggleReservationsIsFetched}
         updateReservations={updateReservations}

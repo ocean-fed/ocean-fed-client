@@ -41,11 +41,13 @@ export default function PresentAvailableSeatsByTime(props: IPresentAvailableSeat
 
   function updateSelectedNumOfSeats1800(e: ChangeEvent<HTMLInputElement>) {
     setNumOfSeatsSeating1800(Number(e.target.value));
+    setNumOfSeatsSeating2100(0);
     props.sendSeatsChange("18.00", Number(e.target.value));
   }
 
   function updateSelectedNumOfSeats2100(e: ChangeEvent<HTMLInputElement>) {
     setNumOfSeatsSeating2100(Number(e.target.value));
+    setNumOfSeatsSeating1800(0);
     props.sendSeatsChange("21.00", Number(e.target.value));
   }
 

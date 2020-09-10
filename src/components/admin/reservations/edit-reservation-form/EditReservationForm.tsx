@@ -1,12 +1,16 @@
 import React, { useReducer, ChangeEvent, useEffect, useState, FormEvent } from "react";
+import "./EditReservation.scss";
 import Reservation from "../../../../models/Reservation";
 import { TextField, Box } from "@material-ui/core";
 import PresentAvailableSeatsByTime from "./present-available-seats-by-time/PresentAvailableSeatsByTime";
+import UpdateReservation from "./update-reservation/UpdateReservation";
+import Guest from "../../../../models/Guest";
 
 export interface IEditReservationForm {
   showEditReservationForm: boolean;
   reservationToEdit: Reservation;
   reservations: Reservation[];
+  toggleRefreshReservations(): void;
 }
 
 export interface AdminReservationFormValue {
@@ -32,6 +36,8 @@ export default function EditReservationForm(props: IEditReservationForm) {
     phone: "",
   };
 
+  const [shouldBeDisabled, setShouldBeDisabled] = useState(true);
+
   const [reservationToEditFormInput, setReservationToEditFormInput] = useReducer(
     (state: AdminReservationFormValue, newState: AdminReservationFormValue) => ({ ...state, ...newState }),
     defaultAdminReservationFormValue
@@ -45,6 +51,14 @@ export default function EditReservationForm(props: IEditReservationForm) {
     }
   }
 
+  useEffect(() => {
+    if (reservationToEditFormInput.seats !== 0 && reservationToEditFormInput.email !== "") {
+      setShouldBeDisabled(false);
+    } else {
+      setShouldBeDisabled(true);
+    }
+  }, [reservationToEditFormInput.seats, reservationToEditFormInput.email]);
+
   function updateTimeAndNumOfSeats(timeValue: string, seatsValue: number) {
     setReservationToEditFormInput({ time: timeValue } as any);
     setReservationToEditFormInput({ seats: seatsValue } as any);
@@ -57,13 +71,37 @@ export default function EditReservationForm(props: IEditReservationForm) {
     setRefreshAvailableSeatsByTime(!refreshAvailableSeatsByTime);
   }
 
+  // transform, set and confirm update reservation and guest and then toggle confirm (and toggle refresh higher up)
+
+  const defaultReservationToUpdate: Reservation = new Reservation();
+  const defaultGuestToUpdate: Guest = new Guest();
+  const [reservationToUpdate, setReservationToUpdate] = useState(defaultReservationToUpdate);
+  const [guestToUpdate, setGuestToUpdate] = useState(defaultGuestToUpdate);
+
+  const [confirmUpdateReservation, setConfirmUpdateReservation] = useState(false);
+
   function sendReservationToUpdate(e: FormEvent) {
     e.preventDefault();
     console.log(reservationToEditFormInput);
-    // send the inputs object higher to be transformed and sent to the API
-    // (replace UpdateReservation)
-    // send also a confirmUpdateReservation = true to start the process
+    const reservation = new Reservation();
+    reservation.refId = reservationToEditFormInput.refId;
+    reservation.date = reservationToEditFormInput.date;
+    reservation.time = reservationToEditFormInput.time || "";
+    reservation.seats = reservationToEditFormInput.seats || 0;
+    const guest = new Guest();
+    guest.name = reservationToEditFormInput.name || "";
+    guest.email = reservationToEditFormInput.email || "";
+    guest.phone = reservationToEditFormInput.phone || "";
+    setReservationToUpdate(reservation);
+    setGuestToUpdate(guest);
+    toggleConfirmUpdateReservation();
   }
+
+  function toggleConfirmUpdateReservation() {
+    setConfirmUpdateReservation(!confirmUpdateReservation);
+  }
+
+  const [giveFeedback, setGiveFeedback] = useState(false);
 
   useEffect(() => {
     setReservationToEditFormInput({
@@ -75,13 +113,18 @@ export default function EditReservationForm(props: IEditReservationForm) {
       email: props.reservationToEdit.guestInfo?.email || "",
       phone: props.reservationToEdit.guestInfo?.phone || "",
     });
+    setGiveFeedback(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.reservationToEdit]);
+
+  if (giveFeedback) {
+    return (<p className="confirmation">Bokning ändrat</p>)
+  }
 
   if (props.showEditReservationForm) {
     return (
       <>
-{/*         <code>{JSON.stringify(props.reservationToEdit)}</code> */}
+        {/*         <code>{JSON.stringify(props.reservationToEdit)}</code> */}
         <br />
         <form onSubmit={sendReservationToUpdate}>
           <Box my={1}>
@@ -141,12 +184,20 @@ export default function EditReservationForm(props: IEditReservationForm) {
               name="phone"
             />
           </Box>
-          <button type="submit">Confirm ändra bokning</button>
+          <button type="submit" disabled={shouldBeDisabled}>
+            Confirm ändra bokning
+          </button>
         </form>
-        <br/>
-        <code>
-          Current value of reservationToEditFormInput: {JSON.stringify(reservationToEditFormInput)}
-        </code>
+        <br />
+        <code>Current value of reservationToEditFormInput: {JSON.stringify(reservationToEditFormInput)}</code>
+        <UpdateReservation
+          reservationToUpdate={reservationToUpdate}
+          guestToUpdate={guestToUpdate}
+          confirmUpdateReservation={confirmUpdateReservation}
+          toggleConfirmUpdateReservation={toggleConfirmUpdateReservation}
+          toggleRefreshReservations={props.toggleRefreshReservations}
+          giveFeedback={() => setGiveFeedback(true)}
+        ></UpdateReservation>
       </>
     );
   }
